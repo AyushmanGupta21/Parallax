@@ -21,7 +21,7 @@ function truncate(addr: string) {
 
 export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
     const [status, setStatus] = useState<TxStatus>({ state: "idle" });
-    const [destination, setDestination] = useState(TREASURY_ADDRESS);
+    const [destination, setDestination] = useState("");
 
     const handleSend = async () => {
         if (!destination) return;
@@ -80,7 +80,7 @@ export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
             transition={{ duration: 0.5, delay: 0.1 }}
             className={`glass-card rounded-[32px] p-8 relative flex flex-col justify-between h-full ${className}`}
         >
-            <div className="relative z-10">
+            <div className="relative z-10 w-full">
                 <div className="flex items-center gap-4 mb-8">
                     <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
                         <Send size={22} className="text-white" />
@@ -103,8 +103,8 @@ export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
                             type="text"
                             value={destination}
                             onChange={(e) => setDestination(e.target.value)}
-                            placeholder="G..."
-                            className="w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-xs font-mono text-cyan-400 focus:outline-none focus:border-cyan-500/50 transition-colors"
+                            placeholder={`Example: ${TREASURY_ADDRESS}`}
+                            className="w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-xs font-mono text-cyan-400 focus:outline-none focus:border-cyan-500/50 transition-colors placeholder:text-slate-700"
                         />
                     </div>
                 </div>
