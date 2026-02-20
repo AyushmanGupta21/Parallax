@@ -11,7 +11,7 @@ export function BentoGrid() {
 
     return (
         <section id="dashboard" className="px-4 py-20 max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[400px]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(400px,auto)]">
 
                 {/* Card 1: Network Status (Small) */}
                 <motion.div
