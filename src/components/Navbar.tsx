@@ -9,6 +9,7 @@ import { WalletButton } from "./WalletButton";
 export function Navbar() {
     const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
+    const [activeTab, setActiveTab] = useState("home");
     const { wallet, connect, disconnect } = useFreighter();
 
     // Map scroll range to animation values
@@ -17,8 +18,34 @@ export function Navbar() {
     const dividerPadding = useTransform(scrollY, [0, 100], ["20px", "0px"]);
 
     useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 50);
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            setIsScrolled(currentScrollY > 50);
+
+            const dashboard = document.getElementById("dashboard");
+            if (dashboard) {
+                // Buffer of 150px so it switches right before the section hits the exact top
+                if (currentScrollY >= dashboard.offsetTop - 150) {
+                    setActiveTab("dashboard");
+                } else {
+                    setActiveTab("home");
+                }
+            } else {
+                if (currentScrollY > 400) setActiveTab("dashboard");
+                else setActiveTab("home");
+            }
+        };
+
         window.addEventListener("scroll", handleScroll);
+
+        // Run once on mount to establish initial state correctly
+        handleScroll();
+
+        // Also respect hash if present
+        if (typeof window !== "undefined" && window.location.hash) {
+            setActiveTab(window.location.hash.replace("#", ""));
+        }
+
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -61,17 +88,30 @@ export function Navbar() {
                     >
                         <ul className="flex items-center h-full gap-1 text-[15px] font-normal text-white/50">
                             <li>
-                                <a href="#" className="px-5 py-1.5 rounded-full bg-white text-black font-medium transition-all shadow-sm">
+                                <a
+                                    href="#"
+                                    onClick={() => setActiveTab("home")}
+                                    className={`px-5 py-1.5 rounded-full font-medium transition-all shadow-sm flex items-center ${activeTab === "home" ? "bg-white text-black" : "hover:bg-white/10 hover:text-white"}`}
+                                >
                                     Home
                                 </a>
                             </li>
                             <li className="hidden md:block">
-                                <a href="#dashboard" className="px-3 py-1.5 rounded-full hover:bg-white/10 hover:text-white transition-all">
+                                <a
+                                    href="#dashboard"
+                                    onClick={() => setActiveTab("dashboard")}
+                                    className={`px-4 py-1.5 rounded-full font-medium transition-all flex items-center ${activeTab === "dashboard" ? "bg-white text-black shadow-sm" : "hover:bg-white/10 hover:text-white"}`}
+                                >
                                     Dashboard
                                 </a>
                             </li>
                             <li className="hidden md:block">
-                                <a href="https://developers.stellar.org" target="_blank" className="px-3 py-1.5 rounded-full hover:bg-white/10 hover:text-white transition-all">
+                                <a
+                                    href="https://developers.stellar.org"
+                                    target="_blank"
+                                    onClick={() => setActiveTab("docs")}
+                                    className={`px-4 py-1.5 rounded-full font-medium transition-all flex items-center ${activeTab === "docs" ? "bg-white text-black shadow-sm" : "hover:bg-white/10 hover:text-white"}`}
+                                >
                                     Docs
                                 </a>
                             </li>

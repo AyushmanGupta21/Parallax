@@ -16,7 +16,11 @@ export function PriceTicker() {
 
     return (
         <div className="w-full bg-gradient-to-r from-red-600 to-red-900 py-4 -rotate-2 scale-105 my-20 overflow-hidden shadow-2xl shadow-red-900/50 relative z-20 border-y border-red-500/50">
-            <div className="flex animate-marquee gap-12 whitespace-nowrap">
+            <motion.div
+                className="flex gap-12 whitespace-nowrap w-max"
+                animate={{ x: [0, "-50%"] }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            >
                 {items.map((ticker, i) => (
                     <div key={i} className="flex items-center gap-4 shrink-0">
                         <span className="text-white font-bold tracking-[0.2em] text-lg uppercase flex items-center gap-4 font-anton">
@@ -30,7 +34,7 @@ export function PriceTicker() {
                         </span>
                     </div>
                 ))}
-            </div>
+            </motion.div>
         </div>
     );
 }
