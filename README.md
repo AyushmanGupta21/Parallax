@@ -4,7 +4,7 @@ Parallax is a high-performance, minimalist decentralized application (DApp) buil
 
 ## Vision
 
-The goal of Parallax is to provide a sophisticated "Oracle" or dashboard for Stellar users—a place where financial data, asset management, and network interactions converge in a unified, beautiful interface. We are moving away from cluttered crypto tools to a refined, professional experience.
+Parallax serves as the ultimate "Oracle" and command center for the Stellar network. We are bridging the gap between complex blockchain data and user experience by converging real-time asset feeds, portfolio management, and smart contract interactions into a single, unified interface. We are leaving behind cluttered Web3 tools to deliver the refined, professional experience that the next generation of global finance demands.
 
 ## Features
 
