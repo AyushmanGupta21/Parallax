@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, AlertTriangle, CheckCircle2, ArrowRight, ExternalLink } from "lucide-react";
 import { useState } from "react";
-import { buildSendOneLumenTx, submitSignedTx, TREASURY_ADDRESS } from "@/lib/stellar";
+import { buildSendXlmTx, submitSignedTx, TREASURY_ADDRESS } from "@/lib/stellar";
 
 type Props = { publicKey: string; onSuccess?: (hash: string) => void; className?: string };
 
@@ -22,6 +22,7 @@ function truncate(addr: string) {
 export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
     const [status, setStatus] = useState<TxStatus>({ state: "idle" });
     const [destination, setDestination] = useState("");
+    const [amount, setAmount] = useState("");
 
     const handleSend = async () => {
         if (!destination) return;
@@ -29,7 +30,7 @@ export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
         setStatus({ state: "building" });
         try {
             console.log("[SendXLMForm] Building XDR...");
-            const xdr = await buildSendOneLumenTx(publicKey, destination);
+            const xdr = await buildSendXlmTx(publicKey, destination, amount);
             console.log("[SendXLMForm] XDR built:", xdr);
 
             setStatus({ state: "signing" });
@@ -94,7 +95,20 @@ export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
                 <div className="bg-black/40 rounded-2xl p-6 mb-6 space-y-4 border border-white/5 backdrop-blur-sm">
                     <div className="flex justify-between items-center">
                         <span className="text-slate-400 text-sm font-medium">Amount</span>
-                        <span className="text-xl font-bold text-white font-grotesk tracking-tight">1.0000 XLM</span>
+                        <div className="flex items-center gap-2">
+                            <input
+                                type="number"
+                                step="0.0001"
+                                min="0"
+                                value={amount}
+                                onChange={(e) => setAmount(e.target.value)}
+                                placeholder="10"
+                                style={{ width: `${Math.max(4, (amount.length || 2) * 1.2)}ch` }}
+                                className="min-w-[100px] max-w-[200px] bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-center text-lg font-mono font-bold text-cyan-400 focus:outline-none focus:border-cyan-500/50 transition-colors placeholder:text-slate-700 disabled:opacity-50"
+                                disabled={isInProgress}
+                            />
+                            <span className="text-xl font-bold text-white font-grotesk tracking-tight">XLM</span>
+                        </div>
                     </div>
                     <div className="h-px bg-white/5 w-full" />
                     <div className="space-y-2">
@@ -104,7 +118,8 @@ export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
                             value={destination}
                             onChange={(e) => setDestination(e.target.value)}
                             placeholder={`Example: ${TREASURY_ADDRESS}`}
-                            className="w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-xs font-mono text-cyan-400 focus:outline-none focus:border-cyan-500/50 transition-colors placeholder:text-slate-700"
+                            disabled={isInProgress}
+                            className="w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-xs font-mono text-cyan-400 focus:outline-none focus:border-cyan-500/50 transition-colors placeholder:text-slate-700 disabled:opacity-50"
                         />
                     </div>
                 </div>
@@ -112,12 +127,12 @@ export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
                 <motion.button
                     whileHover={!isInProgress ? { scale: 1.02 } : {}}
                     whileTap={!isInProgress ? { scale: 0.98 } : {}}
-                    onClick={handleSend}
-                    disabled={isInProgress || status.state === "success"}
+                    onClick={status.state === "success" ? () => { setStatus({ state: "idle" }); setDestination(""); setAmount(""); } : handleSend}
+                    disabled={isInProgress || !amount || parseFloat(amount) <= 0 || !destination}
                     className={`
             w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 relative overflow-hidden transition-all
             ${status.state === "success"
-                            ? "bg-emerald-500 text-white shadow-emerald-500/30"
+                            ? "bg-emerald-500 text-white shadow-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/40"
                             : "bg-gradient-to-r from-violet-600 to-cyan-600 text-white hover:shadow-lg hover:shadow-cyan-500/25"}
             disabled:opacity-80 disabled:cursor-not-allowed
           `}
@@ -130,11 +145,11 @@ export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
                     ) : status.state === "success" ? (
                         <>
                             <CheckCircle2 size={20} />
-                            Success!
+                            Send Another Transaction <ArrowRight size={20} />
                         </>
                     ) : (
                         <>
-                            Confirm 1 XLM Send <ArrowRight size={20} />
+                            Confirm {amount || "0"} XLM Send <ArrowRight size={20} />
                         </>
                     )}
                 </motion.button>

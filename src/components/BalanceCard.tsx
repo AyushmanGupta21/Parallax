@@ -1,14 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Coins, RefreshCw, Activity } from "lucide-react";
+import { Coins, RefreshCw, Activity, ArrowDownLeft, ArrowUpRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
-import { fetchXLMBalance } from "@/lib/stellar";
+import { fetchXLMBalance, fetchRecentPayments } from "@/lib/stellar";
 
 type Props = { publicKey: string; className?: string };
 
 export function BalanceCard({ publicKey, className }: Props) {
     const [balance, setBalance] = useState<string | null>(null);
+    const [payments, setPayments] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [refreshing, setRefreshing] = useState(false);
@@ -18,8 +19,12 @@ export function BalanceCard({ publicKey, className }: Props) {
         else setLoading(true);
         setError(null);
         try {
-            const bal = await fetchXLMBalance(publicKey);
+            const [bal, recentPayments] = await Promise.all([
+                fetchXLMBalance(publicKey),
+                fetchRecentPayments(publicKey)
+            ]);
             setBalance(bal);
+            setPayments(recentPayments);
         } catch {
             setError("Failed to fetch balance.");
         } finally {
@@ -78,7 +83,41 @@ export function BalanceCard({ publicKey, className }: Props) {
                     </div>
                 )}
 
-                <div className="flex items-center gap-6 mt-8 pt-6 border-t border-white/5">
+                {/* Transaction History Section */}
+                {!loading && payments.length > 0 && (
+                    <div className="mt-6 flex-1 max-h-[520px] overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-thumb]:rounded-full">
+                        <h4 className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-3">Recent Transactions</h4>
+                        <div className="space-y-2">
+                            {payments.map((p) => {
+                                // some payments might be create_account, check if amount exists
+                                const amount = p.amount || p.starting_balance || "0";
+                                const isReceived = p.to === publicKey || p.account === publicKey; // account is for create
+                                const displayAmount = parseFloat(amount).toFixed(2);
+
+                                return (
+                                    <div key={p.id} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                                        <div className="flex items-center gap-3">
+                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isReceived ? "bg-emerald-500/10 text-emerald-400" : "bg-white/10 text-white"}`}>
+                                                {isReceived ? <ArrowDownLeft size={14} /> : <ArrowUpRight size={14} />}
+                                            </div>
+                                            <div>
+                                                <p className="text-sm font-medium text-white">{isReceived ? "Received" : "Sent"}</p>
+                                                <p className="text-[10px] text-white/40 font-mono truncate w-24">
+                                                    {isReceived ? p.from || p.funder : p.to || "Unknown"}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className={`text-sm font-bold font-mono ${isReceived ? "text-emerald-400" : "text-white"}`}>
+                                            {isReceived ? "+" : "-"}{displayAmount} XLM
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+
+                <div className="flex items-center gap-6 mt-auto pt-6 border-t border-white/5 shrink-0">
                     <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wide">
                         <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                         <span>Testnet Active</span>

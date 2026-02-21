@@ -40,10 +40,6 @@ export function useFreighter() {
     }
   }, []);
 
-  useEffect(() => {
-    checkInstalled();
-  }, [checkInstalled]);
-
   const connect = useCallback(async (): Promise<ConnectResult> => {
     console.log("[useFreighter] Connect requested");
     try {
@@ -86,6 +82,8 @@ export function useFreighter() {
         isChecking: false,
       });
 
+      localStorage.setItem("freighter_connected", "true");
+
       return { success: true, publicKey };
     } catch (err: unknown) {
       console.error("[useFreighter] Connection error:", err);
@@ -95,7 +93,16 @@ export function useFreighter() {
     }
   }, []);
 
+  useEffect(() => {
+    checkInstalled().then((installed) => {
+      if (installed && localStorage.getItem("freighter_connected") === "true") {
+        connect();
+      }
+    });
+  }, [checkInstalled, connect]);
+
   const disconnect = useCallback(() => {
+    localStorage.removeItem("freighter_connected");
     setWallet((prev) => ({
       ...prev,
       isConnected: false,

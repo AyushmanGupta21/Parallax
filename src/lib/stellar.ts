@@ -17,10 +17,24 @@ export async function fetchXLMBalance(publicKey: string): Promise<string> {
     return xlmBalance ? parseFloat(xlmBalance.balance).toFixed(4) : "0.0000";
 }
 
-// ─── Send 1 XLM Transaction ───────────────────────────────────────────────────
-export async function buildSendOneLumenTx(
+// ─── Transaction History ──────────────────────────────────────────────────────
+export async function fetchRecentPayments(publicKey: string) {
+    // Payments includes creates, payments, path payments.
+    const paymentsPage = await server
+        .payments()
+        .forAccount(publicKey)
+        .order("desc")
+        .limit(10) // fetch a bit more and filter on client or here
+        .call();
+        
+    return paymentsPage.records;
+}
+
+// ─── Send Custom XLM Transaction ────────────────────────────────────────────────
+export async function buildSendXlmTx(
     senderPublicKey: string,
-    destinationAddress: string
+    destinationAddress: string,
+    amount: string
 ): Promise<string> {
     const sourceAccount = await server.loadAccount(senderPublicKey);
 
@@ -32,7 +46,7 @@ export async function buildSendOneLumenTx(
             StellarSdk.Operation.payment({
                 destination: destinationAddress,
                 asset: StellarSdk.Asset.native(),
-                amount: "1",
+                amount: amount,
             })
         )
         .addMemo(StellarSdk.Memo.text("Parallax API - Level 1"))
