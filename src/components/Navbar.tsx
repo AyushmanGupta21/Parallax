@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Moon, Command, Activity } from "lucide-react";
+import { Moon, Command } from "lucide-react";
+import Image from "next/image";
 import { useFreighter } from "@/hooks/useFreighter";
 import { WalletButton } from "./WalletButton";
 
@@ -60,7 +61,7 @@ export function Navbar() {
                 {/* Left Side: Logo */}
                 <div className="flex items-center gap-5 pointer-events-auto transition-opacity duration-300">
                     <div className="flex items-center gap-2 cursor-pointer">
-                        <Activity className="text-white" size={24} />
+                        <div className="overflow-hidden w-[70px] h-[70px] flex items-center justify-center shrink-0"><Image src="/logo.jpeg" alt="Parallax Logo" width={120} height={120} className="object-contain shrink-0" /></div>
                         <span className="font-anton text-2xl text-white tracking-wide uppercase">PARALLAX</span>
                     </div>
 
