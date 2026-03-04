@@ -26,28 +26,12 @@ Built as a **Level 1 Stellar Mastery** project for the Rise In Stellar program, 
 
 | Feature | Description |
 |---|---|
-| 🔐 **Wallet Integration** | Secure, non-custodial connection via [Freighter](https://www.freighter.app/) with auto-reconnect on reload |
-| 💰 **Live Balance** | Real-time XLM balance with USD equivalent, fetched via Stellar Horizon API |
-| 📜 **Transaction History** | Scrollable, live list of your recent incoming/outgoing payments |
-| 📤 **Send XLM** | Custom amount input, recipient address, real-time signing and hash tracking |
-| 📈 **Price Ticker** | Animated, infinite-scroll banner of live Stellar asset pairs (XLM/USDC, AQUA/XLM, etc.) |
-| 🧭 **ScrollSpy Nav** | Navbar active state shifts dynamically between sections as you scroll |
-
----
-
-## Screenshots
-
-### 🏠 Hero — Wallet Connected
-> Landing page with Freighter wallet connected. Note the "Testnet Active" indicator and the truncated public key in the top-right navbar.
-
-![Hero Page — Wallet Connected](./docs/screenshots/screenshot-hero.png)
-
----
-
-### 📊 Dashboard — Balance, Transactions & Successful Send
-> Dashboard showing live XLM balance, USD equivalent, the Send Transaction form, and the full scrollable transaction history. The green "Send Another Transaction" button confirms a successful testnet payment. The clickable transaction hash appears below the form.
-
-![Dashboard — Balance and Successful Transaction](./docs/screenshots/screenshot-dashboard.png)
+| **Wallet Integration** | Secure, non-custodial connection via [Freighter](https://www.freighter.app/) with auto-reconnect on reload |
+| **Live Balance** | Real-time XLM balance with USD equivalent, fetched via Stellar Horizon API |
+| **Transaction History** | Scrollable, live list of your recent incoming/outgoing payments |
+| **Send XLM** | Custom amount input, recipient address, real-time signing and hash tracking |
+| **Price Ticker** | Animated, infinite-scroll banner of live Stellar asset pairs (XLM/USDC, AQUA/XLM, etc.) |
+| **ScrollSpy Nav** | Navbar active state shifts dynamically between sections as you scroll |
 
 ---
 
@@ -98,7 +82,7 @@ Then open **[http://localhost:3000](http://localhost:3000)** in your browser.
 2. Approve the connection request in the Freighter popup.
 3. Your public key, XLM balance, and transaction history will load automatically.
 
-> 💡 **Need testnet XLM?** Use the [Stellar Friendbot](https://laboratory.stellar.org/#?network=test) to fund your testnet account for free.
+> **Need testnet XLM?** Use the [Stellar Friendbot](https://laboratory.stellar.org/#?network=test) to fund your testnet account for free.
 
 ### Sending XLM
 1. Connect your Freighter wallet and scroll to the **Dashboard** section.
@@ -109,33 +93,9 @@ Then open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
 ---
 
-## Project Structure
+![Parallax App](./docs/screenshots/screenshot-hero.png)
 
-```
-parallax/
-├── docs/
-│   └── screenshots/          # README screenshots
-├── public/
-│   └── logo.jpeg             # App logo
-├── src/
-│   ├── app/
-│   │   ├── globals.css       # Global styles & Tailwind config
-│   │   ├── layout.tsx        # Root layout & fonts
-│   │   └── page.tsx          # Home page
-│   ├── components/
-│   │   ├── BalanceCard.tsx   # Live balance + transaction history
-│   │   ├── BentoGrid.tsx     # Dashboard grid layout
-│   │   ├── Hero.tsx          # Landing hero section
-│   │   ├── Navbar.tsx        # Scrollspy navigation bar
-│   │   ├── PriceTicker.tsx   # Animated marquee price feed
-│   │   ├── SendXLMForm.tsx   # Transaction builder form
-│   │   └── WalletButton.tsx  # Wallet connect/disconnect button
-│   ├── hooks/
-│   │   └── useFreighter.ts   # Freighter wallet state hook
-│   └── lib/
-│       └── stellar.ts        # Stellar SDK helpers & Horizon calls
-└── README.md
-```
+![Parallax Dashboard](./docs/screenshots/screenshot-dashboard.png)
 
 ---
 
