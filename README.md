@@ -35,6 +35,18 @@ Built as a **Level 1 Stellar Mastery** project for the Rise In Stellar program, 
 
 ---
 
+## App Preview
+
+Landing page with Freighter wallet connected, showing the Testnet Active status and account key in the navbar.
+
+![Parallax Landing](./docs/screenshots/screenshot-hero.png)
+
+Dashboard view with live XLM balance, USD equivalent, the Send Transaction form, and full transaction history. The transaction hash is displayed below the form upon a successful testnet payment.
+
+![Parallax Dashboard](./docs/screenshots/screenshot-dashboard.png)
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -90,12 +102,6 @@ Then open **[http://localhost:3000](http://localhost:3000)** in your browser.
 3. Paste the **recipient's Stellar address** in the "To Address" field.
 4. Click **"Confirm XLM Send"** and approve the transaction in Freighter.
 5. The transaction hash will appear below the form upon success.
-
----
-
-![Parallax App](./docs/screenshots/screenshot-hero.png)
-
-![Parallax Dashboard](./docs/screenshots/screenshot-dashboard.png)
 
 ---
 
