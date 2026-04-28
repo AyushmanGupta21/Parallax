@@ -5,7 +5,7 @@ import { Database, Zap, Activity } from "lucide-react";
 
 export function Hero() {
     return (
-        <section className="relative min-h-[90vh] w-full bg-black overflow-hidden flex flex-col justify-between px-6 pb-12 pt-32 md:pt-40">
+        <section className="relative min-h-[90vh] w-full bg-black overflow-hidden flex flex-col justify-between px-4 sm:px-6 pb-10 sm:pb-12 pt-28 sm:pt-32 md:pt-40">
             <div className="flex flex-col items-center justify-center w-full z-10 mt-auto mb-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 100 }}
@@ -13,7 +13,7 @@ export function Hero() {
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                     className="select-none text-center"
                 >
-                    <h1 className="text-[12vw] font-anton font-normal leading-none text-white tracking-wide uppercase mix-blend-difference">
+                    <h1 className="text-[16vw] sm:text-[13vw] md:text-[12vw] font-anton font-normal leading-none text-white tracking-wide uppercase mix-blend-difference">
                         STELLAR<br />ORACLE
                     </h1>
                 </motion.div>
@@ -27,7 +27,7 @@ export function Hero() {
                     <p className="text-sm md:text-lg tracking-[0.3em] uppercase text-white/40 font-outfit">
                         Aggregated Price Feeds for
                     </p>
-                    <p className="font-serif text-3xl md:text-5xl italic text-white leading-tight">
+                    <p className="font-serif text-2xl sm:text-3xl md:text-5xl italic text-white leading-tight">
                         Soroban & Native Assets.
                     </p>
                 </motion.div>

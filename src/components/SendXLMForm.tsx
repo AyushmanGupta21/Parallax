@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Send, AlertTriangle, CheckCircle2, ArrowRight, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import { buildSendXlmTx, submitSignedTx, TREASURY_ADDRESS } from "@/lib/stellar";
+import { useWallet } from "@/hooks/useWallet";
 
 type Props = { publicKey: string; onSuccess?: (hash: string) => void; className?: string };
 
@@ -23,51 +24,32 @@ export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
     const [status, setStatus] = useState<TxStatus>({ state: "idle" });
     const [destination, setDestination] = useState("");
     const [amount, setAmount] = useState("");
+    const { signTransaction } = useWallet();
 
     const handleSend = async () => {
         if (!destination) return;
-        console.log("[SendXLMForm] Starting transaction flow...");
         setStatus({ state: "building" });
         try {
-            console.log("[SendXLMForm] Building XDR...");
             const xdr = await buildSendXlmTx(publicKey, destination, amount);
-            console.log("[SendXLMForm] XDR built:", xdr);
 
             setStatus({ state: "signing" });
 
-            const freighter = await import("@stellar/freighter-api");
-            console.log("[SendXLMForm] Freighter module loaded for signing");
-
-            // Check if signTransaction is available
-            if (!freighter.signTransaction) {
-                throw new Error("Freighter 'signTransaction' not found. Is the extension installed?");
+            let signedXdr: string;
+            try {
+                signedXdr = await signTransaction(xdr);
+            } catch (err) {
+                const msg = err instanceof Error ? err.message : "Transaction rejected.";
+                if (msg.toLowerCase().includes("closed")) {
+                    throw new Error("Transaction rejected. Please approve it in your wallet.");
+                }
+                throw new Error(msg);
             }
-
-            console.log("[SendXLMForm] Requesting signature...");
-            const signResult = await freighter.signTransaction(xdr, {
-                networkPassphrase: "Test SDF Network ; September 2015",
-            });
-            console.log("[SendXLMForm] Sign result:", signResult);
-
-            if (!signResult || (typeof signResult === "object" && "error" in signResult)) {
-                throw new Error(
-                    typeof signResult === "object" && "error" in signResult
-                        ? signResult.error
-                        : "Transaction rejected."
-                );
-            }
-
-            const signedXdr = typeof signResult === "string" ? signResult : signResult.signedTxXdr;
-            if (!signedXdr) throw new Error("Could not retrieve signed transaction.");
 
             setStatus({ state: "submitting" });
-            console.log("[SendXLMForm] Submitting to Horizon...");
             const hash = await submitSignedTx(signedXdr);
-            console.log("[SendXLMForm] Success hash:", hash);
             setStatus({ state: "success", hash });
             onSuccess?.(hash);
         } catch (err: unknown) {
-            console.error("[SendXLMForm] Transaction error:", err);
             setStatus({ state: "error", message: err instanceof Error ? err.message : "Error." });
         }
     };
@@ -165,7 +147,7 @@ export function SendXLMForm({ publicKey, onSuccess, className }: Props) {
                         >
                             {[
                                 { key: "building", label: "Constructing XDR..." },
-                                { key: "signing", label: "Waiting for Freighter signature..." },
+                                { key: "signing", label: "Waiting for wallet signature..." },
                                 { key: "submitting", label: "Broadcasting to Stellar Testnet..." }
                             ].map((step) => {
                                 const stepOrder = ["building", "signing", "submitting"];

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, Space_Mono, Outfit, Anton, Playfair_Display, Oswald } from "next/font/google";
+import { WalletProvider } from "@/hooks/useWallet";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -22,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
         className={`${inter.variable} ${spaceGrotesk.variable} ${spaceMono.variable} ${outfit.variable} ${anton.variable} ${playfair.variable} ${oswald.variable} font-sans antialiased bg-black text-white selection:bg-white/20 selection:text-white overflow-x-hidden`}
       >
-        {children}
+        <WalletProvider>{children}</WalletProvider>
       </body>
     </html>
   );

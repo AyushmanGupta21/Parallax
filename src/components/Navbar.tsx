@@ -2,16 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Moon, Command } from "lucide-react";
 import Image from "next/image";
-import { useFreighter } from "@/hooks/useFreighter";
+import { useWallet } from "@/hooks/useWallet";
 import { WalletButton } from "./WalletButton";
 
 export function Navbar() {
     const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeTab, setActiveTab] = useState("home");
-    const { wallet, connect, disconnect } = useFreighter();
+    const [isConnecting, setIsConnecting] = useState(false);
+    const { wallet, connect, disconnect } = useWallet();
 
     // Map scroll range to animation values
     const dividerWidth = useTransform(scrollY, [0, 100], ["200px", "0px"]);
@@ -50,6 +50,15 @@ export function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const handleConnect = async () => {
+        setIsConnecting(true);
+        try {
+            await connect();
+        } finally {
+            setIsConnecting(false);
+        }
+    };
+
     return (
         <motion.nav
             initial={{ y: -100, opacity: 0 }}
@@ -61,8 +70,8 @@ export function Navbar() {
                 {/* Left Side: Logo */}
                 <div className="flex items-center gap-5 pointer-events-auto transition-opacity duration-300">
                     <div className="flex items-center gap-2 cursor-pointer">
-                        <div className="overflow-hidden w-[70px] h-[70px] flex items-center justify-center shrink-0"><Image src="/logo.jpeg" alt="Parallax Logo" width={120} height={120} className="object-contain shrink-0" /></div>
-                        <span className="font-anton text-2xl text-white tracking-wide uppercase">PARALLAX</span>
+                        <div className="overflow-hidden w-[50px] h-[50px] sm:w-[70px] sm:h-[70px] flex items-center justify-center shrink-0"><Image src="/logo.jpeg" alt="Parallax Logo" width={120} height={120} className="object-contain shrink-0" /></div>
+                        <span className="font-anton text-xl sm:text-2xl text-white tracking-wide uppercase">PARALLAX</span>
                     </div>
 
                     {/* Vertical Divider & Text */}
@@ -122,17 +131,14 @@ export function Navbar() {
                             </li>
 
                             <li>
-                                {/* Compact Wallet Connection in Pill */}
-                                {wallet.isConnected ? (
-                                    <button onClick={disconnect} className="ml-1 px-4 py-1.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[12px] rounded-full font-bold hover:bg-emerald-500/30 transition-all flex items-center gap-2">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                        {wallet.publicKey?.slice(0, 4)}...{wallet.publicKey?.slice(-4)}
-                                    </button>
-                                ) : (
-                                    <button onClick={connect} className="ml-1 px-5 py-2 bg-gradient-to-b from-neutral-600 to-neutral-950 text-white text-[14px] rounded-full font-medium hover:from-neutral-500 hover:to-neutral-900 transition-all shadow-inner">
-                                        Connect Wallet
-                                    </button>
-                                )}
+                                <WalletButton
+                                    wallet={wallet}
+                                    onConnect={handleConnect}
+                                    onDisconnect={() => {
+                                        void disconnect();
+                                    }}
+                                    isLoading={isConnecting}
+                                />
                             </li>
                         </ul>
                     </motion.div>

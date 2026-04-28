@@ -1,0 +1,6 @@
+[workspace]
+members = ["api_registry"]
+resolver = "2"
+
+[workspace.dependencies]
+soroban-sdk = { version = "22" }

@@ -15,7 +15,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-12 text-center text-white/20 uppercase tracking-widest text-xs font-bold relative z-10">
-        <p>Built for Rise In Stellar Mastery • Level 1</p>
+        <p>Built for Rise In Stellar Mastery • Level 4 — Green Belt</p>
       </footer>
     </main>
   );

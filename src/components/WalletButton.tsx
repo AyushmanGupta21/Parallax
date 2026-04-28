@@ -1,9 +1,9 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Wallet, ChevronDown, LogOut, Copy, CheckCheck, ExternalLink } from "lucide-react";
+import { Wallet, ChevronDown, LogOut, Copy, CheckCheck } from "lucide-react";
 import { useState } from "react";
-import { WalletState } from "@/hooks/useFreighter";
+import { WalletState } from "@/hooks/useWallet";
 
 type Props = {
     wallet: WalletState;
@@ -34,20 +34,6 @@ export function WalletButton({ wallet, onConnect, onDisconnect, isLoading }: Pro
                 <div className="w-3 h-3 rounded-full border-2 border-blue-500/50 border-t-transparent animate-spin" />
                 Checking...
             </div>
-        );
-    }
-
-    if (!wallet.isInstalled) {
-        return (
-            <a
-                href="https://www.freighter.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full btn-primary text-white text-sm font-medium relative z-10"
-            >
-                <ExternalLink size={15} />
-                Install Freighter
-            </a>
         );
     }
 
@@ -92,6 +78,11 @@ export function WalletButton({ wallet, onConnect, onDisconnect, isLoading }: Pro
                 {wallet.network && (
                     <span className="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-xs uppercase">
                         {wallet.network}
+                    </span>
+                )}
+                {wallet.walletId && (
+                    <span className="px-2 py-0.5 rounded-full bg-white/10 text-white/70 text-[10px] uppercase">
+                        {wallet.walletId}
                     </span>
                 )}
                 <ChevronDown
