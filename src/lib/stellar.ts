@@ -42,18 +42,11 @@ function accountToScVal(publicKey: string): StellarSdk.xdr.ScVal {
 
 /**
  * Convert a Soroban contract ID (C-address strkey) to an ScVal.
- * stellar-base v14.0.1 Address.fromString() fails for SAC (Stellar Asset Contract)
- * addresses because isValidContract() returns false for them.
- * This function decodes the strkey bytes directly via StrKey and builds the
- * xdr.ScAddress manually, bypassing the broken validation.
+ * Uses new Contract(id).address().toScVal() which correctly handles
+ * SAC (Stellar Asset Contract) addresses in stellar-sdk v14.
  */
 function contractIdToScVal(contractId: string): StellarSdk.xdr.ScVal {
-  // Decode the contract strkey to raw 32-byte hash
-  const contractBytes = StellarSdk.StrKey.decodeContract(contractId);
-  const scAddress = StellarSdk.xdr.ScAddress.scAddressTypeContract(
-    StellarSdk.xdr.Hash.fromXDR(contractBytes)
-  );
-  return StellarSdk.xdr.ScVal.scvAddress(scAddress);
+  return new StellarSdk.Contract(contractId).address().toScVal();
 }
 
 export type RegistrationEvent = {
