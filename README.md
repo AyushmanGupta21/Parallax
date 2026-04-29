@@ -19,7 +19,7 @@
 
 Parallax is a full-stack developer platform built on the **Stellar blockchain**. It aggregates and indexes real-time price data for native Stellar assets and Soroban tokens, delivering it via a developer dashboard where access control and billing are managed entirely on-chain through **Soroban smart contracts**.
 
-Built as a **Level 4 (Green Belt)** submission for the Rise In Stellar Journey to Mastery program, it demonstrates advanced Stellar capabilities: multi-wallet support, Soroban smart contract deployment, inter-contract token calls, mobile-responsive design, and a full CI/CD pipeline.
+Built for the Rise In Stellar Journey to Mastery program — currently at **Level 4 (Green Belt)**, actively progressing toward **Level 5 (Blue Belt)**. It demonstrates advanced Stellar capabilities: multi-wallet support, Soroban smart contract deployment, inter-contract token calls, mobile-responsive design, and a full CI/CD pipeline.
 
 **Live Demo:** [parallax-eight-psi.vercel.app](https://parallax-eight-psi.vercel.app)
 
@@ -34,10 +34,12 @@ Built as a **Level 4 (Green Belt)** submission for the Rise In Stellar Journey t
 | **Transaction History** | Scrollable live list of recent incoming/outgoing payments | L1 |
 | **Send XLM** | Custom amount input with real-time signing and transaction hash tracking | L1 |
 | **API Key Registry (Smart Contract)** | Soroban contract call to register a developer address on-chain | L2 |
-| **Inter-Contract Token Call** | `register` function transfers 10 XLM via native token contract (Level 4) | L4 |
+| **Inter-Contract Token Call** | `register` function transfers 10 XLM via native token contract | L4 |
 | **3 Error Types Handled** | Wallet not found, transaction rejected, insufficient balance / already registered | L2 |
 | **Transaction Status Tracking** | Building → Signing → Submitting → Success/Error states | L2 |
-| **Price Data Feed** | Mock aggregated price data gated by on-chain registration status | L3 |
+| **Live Price Feed via REST API** | Real Stellar DEX prices served from `GET /api/prices` — Level 5 backend indexer | L5 |
+| **Authenticated API Middleware** | `/api/prices` verifies API key + queries on-chain Soroban registry before returning data | L5 |
+| **Price Indexer (5 pairs)** | XLM/USDC, XLM/AQUA, XLM/yXLM, XLM/EURC, USDC/AQUA — 30s server cache | L5 |
 | **Loading States + Caching** | Spinners on all async ops, registration status cached in localStorage | L3 |
 | **Price Ticker** | Animated infinite-scroll banner of live Stellar asset pairs | L1 |
 | **ScrollSpy Navigation** | Navbar active state tracks scroll position between sections | L2 |
@@ -52,9 +54,11 @@ Built as a **Level 4 (Green Belt)** submission for the Rise In Stellar Journey t
 
 | Field | Value |
 |---|---|
-| **Contract ID** | `PLACEHOLDER — update after deploy` |
+| **Contract ID** | `CCJ7YKWSXJ35PM7EWVVJRIK66KDYHQ2HILTP364KHEF3XNRK2O7XUXVE` |
+| **Deployer** | `GAWJNUSBQAKG3X6UT6NJAGL4YWJDYINR3MULB7FU4EY6B6BOOMY2FPOK` |
+| **Deployed** | 2026-04-28 |
 | **Network** | Stellar Testnet |
-| **Explorer** | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/PLACEHOLDER) |
+| **Explorer** | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CCJ7YKWSXJ35PM7EWVVJRIK66KDYHQ2HILTP364KHEF3XNRK2O7XUXVE) |
 
 ### Contract Functions
 
@@ -115,10 +119,7 @@ cd Parallax
 # 2. Install Node dependencies
 npm install
 
-# 3. Copy environment template
-cp .env.example .env.local
-
-# 4. Start the development server
+# 3. Start the development server
 npm run dev
 ```
 
@@ -154,8 +155,8 @@ stellar contract invoke \
   -- init \
   --treasury <YOUR_STELLAR_ADDRESS>
 
-# 7. Add the contract address to .env.local
-echo "NEXT_PUBLIC_CONTRACT_ID=<CONTRACT_ADDRESS>" >> .env.local
+# 7. Update the contract address in .env
+# Edit NEXT_PUBLIC_CONTRACT_ID=<CONTRACT_ADDRESS> in .env
 ```
 
 ---

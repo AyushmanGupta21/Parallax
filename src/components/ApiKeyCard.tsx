@@ -134,7 +134,7 @@ export function ApiKeyCard({ className }: Props) {
     if (API_REGISTRY_CONTRACT_ID === "PLACEHOLDER_DEPLOY_AND_REPLACE") {
       setStatus({
         state: "error",
-        message: "The smart contract has not been deployed to testnet yet. Set NEXT_PUBLIC_CONTRACT_ID in your .env.local file.",
+        message: "The smart contract has not been deployed to testnet yet. Set NEXT_PUBLIC_CONTRACT_ID in your .env file.",
         code: "not_deployed",
       });
       return;
@@ -172,11 +172,13 @@ export function ApiKeyCard({ className }: Props) {
 
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Unknown error.";
-      // Error type 3: Already registered (contract error) or insufficient balance
+      // Already registered → treat as silent success (key was already paid for)
       if (msg.includes("AlreadyRegistered") || msg.includes("already")) {
-        setStatus({ state: "error", message: "This address is already registered.", code: "registered" });
+        const key = deriveApiKey(wallet.publicKey);
+        localStorage.setItem(`api_registry_${wallet.publicKey}`, "registered");
         setIsAlreadyRegistered(true);
-        setApiKey(deriveApiKey(wallet.publicKey));
+        setApiKey(key);
+        setStatus({ state: "success", hash: "", apiKey: key });
       } else if (msg.toLowerCase().includes("balance") || msg.toLowerCase().includes("insufficient")) {
         setStatus({ state: "error", message: "Insufficient XLM balance. You need at least 10 XLM to register.", code: "balance" });
       } else {
@@ -365,7 +367,7 @@ export function ApiKeyCard({ className }: Props) {
           </motion.div>
         )}
 
-        {status.state === "success" && (
+        {status.state === "success" && status.hash && (
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-4 text-center">
             <p className="text-slate-400 text-xs mb-1 uppercase tracking-widest">Transaction Hash</p>
             <a

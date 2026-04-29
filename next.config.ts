@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   // Fix: Turbopack was walking up to C:\Users\debja\package.json (a stray MediaPipe file)
   // and treating it as the workspace root. Anchoring to "." fixes all module resolution.
   turbopack: {
-    root: ".",
+    root: process.cwd(),
   },
   // Ensure ESM-only packages are transpiled correctly by Next.js
   transpilePackages: [
