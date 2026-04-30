@@ -9,7 +9,7 @@ import ShinyText from "@/components/ShinyText";
 import { WaveBackground } from "@/components/WaveBackground";
 
 export default function Home() {
-    const { connect, wallet, isLoading } = useWallet();
+    const { connect, wallet } = useWallet();
     const router = useRouter();
     const bentoRef = useRef<HTMLDivElement>(null);
     const isMobile = useMobileDetection();
@@ -39,10 +39,10 @@ export default function Home() {
                     {!wallet.isConnected ? (
                         <button
                             onClick={handleConnect}
-                            disabled={isLoading}
+                            disabled={wallet.isChecking}
                             className="w-full sm:w-auto px-[28px] py-[13px] text-[15px] font-bold text-[#0b0c0e] bg-gradient-to-r from-[#8aebff] to-[#00c8d4] rounded-[8px] hover:brightness-110 shadow-[0_0_20px_rgba(0,200,212,0.3)] hover:shadow-[0_0_30px_rgba(0,200,212,0.5)] transition-all flex items-center justify-center gap-[8px]"
                         >
-                            {isLoading ? "Connecting..." : "Connect Wallet"}
+                            {wallet.isChecking ? "Connecting..." : "Connect Wallet"}
                         </button>
                     ) : (
                         <button
