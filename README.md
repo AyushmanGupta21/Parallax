@@ -376,7 +376,8 @@ The following flows have been built, integrated, and verified end-to-end on Stel
 | 2 | Archishman Sarkar | archishmansarkar94@gmail.com | [GBB63...O6YJD](https://stellar.expert/explorer/testnet/account/GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD) | For the API key generate, at the beginning after wallet connect but not generate api in the placeholder it is showing I have API but its not that, so fix the UX so it would look like a empty area, not that I have already generated one | ✅ Registered |
 | 3 | Sushovan Ghosh | gamingdeadlydevils@gmail.com | [GCNVR...V5NP5](https://stellar.expert/explorer/testnet/account/GCNVRQ2GHNYHUJSDOLGD4K7JXRY4V7XFAOTY5L4CBWTIUZ2NM4AV5NP5) | Everything is properly working the connection and everything, would be better if a guide an be added on how to use the API | ✅ Registered |
 | 4 | Arunava Bhol | sg9499398@gmail.com | [GBT2E...Y3PRP](https://stellar.expert/explorer/testnet/account/GBT2EHJKQAWW46QRJUY343YGEJDEPIU3U77S2R7ZXLP4NYQFUTGY3PRP) | The overall experience is nice, if a more detail description could be added then it would be better about the website in the landing page, else everything is working properly | ✅ Registered |
-| 5 | TBD | TBD | TBD | TBD | TBD |
+| 5 | Satyaki Mukherjee | satyakimukherjee22@gmail.com | [GDA2H...IBCRC](https://stellar.expert/explorer/testnet/account/GDA2HEX7INDEPKI43OHLXRKHH4FMCS4RBEAAEKFHS2OIRUQYFT3IBCRC) | Make the confirm transfer button small other things is fine | ✅ Registered |
+| 6 | Sima Mandal | mandalsima026@gmail.com | [GBJQJ...S6JCZ](https://stellar.expert/explorer/testnet/account/GBJQJY3QYRCW6OWDUKINKBTQVY6UQ64MS7W4A6QJN43GSQWSS3ZS6JCZ) | Everything is working fine | ✅ Registered |
 
 > **Instructions for reviewers:** Each user connects their Freighter wallet to the live demo, completes on-chain registration (pays 10 XLM), and their registration is independently verifiable at the contract explorer link in Section 13.
 
