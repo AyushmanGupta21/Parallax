@@ -69,7 +69,7 @@ function sendFreighterMessage(
 /** Returns true if Freighter extension is installed and its content-script responds. */
 async function freighterIsInstalled(): Promise<boolean> {
   // Fast path: window.freighter is set once access has been granted previously
-  if (typeof window !== "undefined" && (window as Record<string, unknown>)["freighter"]) {
+  if (typeof window !== "undefined" && (window as unknown as Record<string, unknown>)["freighter"]) {
     return true;
   }
   try {
