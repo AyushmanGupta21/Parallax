@@ -44,6 +44,7 @@
 15. [Feedback and Iteration](#15-feedback-and-iteration)
 16. [Known Limitations](#16-known-limitations)
 17. [Next Steps](#17-next-steps)
+18. [Submission Checklist](#18-submission-checklist)
 
 ---
 
@@ -388,7 +389,7 @@ The following flows have been built, integrated, and verified end-to-end on Stel
 
 | # | User Name | User Email | User Wallet Address | User Feedback | Improvement Made | Commit ID / Commit Link |
 |---|---|---|---|---|---|---|
-| 1 | Devargho Chakraborty | devarghochakraborty7@gmail.com | `GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7` | Mobile UI and navigation needs improvement — some content on mobile is not properly navigable | Rewrote mobile layout across Transfer, Dashboard and Navbar: fixed Recent Transactions panel height overflow, added scrollable transaction list, fixed Docs nav link, improved mobile drawer UX | TBD — pending commit |
+| 1 | Devargho Chakraborty | devarghochakraborty7@gmail.com | `GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7` | Mobile UI and navigation needs improvement — some content on mobile is not properly navigable | Rewrote mobile layout across Transfer, Dashboard and Navbar: fixed Recent Transactions panel height overflow, added scrollable transaction list, fixed Docs nav link, improved mobile drawer UX | [`dff7fa9`](https://github.com/AyushmanGupta21/Parallax/commit/dff7fa9) |
 | 2 | TBD | TBD | TBD | TBD | TBD | TBD |
 | 3 | TBD | TBD | TBD | TBD | TBD | TBD |
 | 4 | TBD | TBD | TBD | TBD | TBD | TBD |
@@ -415,9 +416,9 @@ Responses are tracked in the [Feedback Sheet](https://docs.google.com/spreadshee
 
 | Iteration | Description | Commit |
 |---|---|---|
-| 1 — Mobile UI & Navigation | **Feedback:** Mobile layout not properly navigable; some content inaccessible on small screens. **Changes made:** Fixed Recent Transactions panel height overflow on the Transfer page (capped with `max-h` + `overflow-y-auto` scroll); fixed Docs nav link to redirect to Stellar developer docs instead of a 404 page; improved mobile drawer UX; ensured responsive layout integrity across Transfer, Dashboard, and Navbar on all screen sizes. | TBD — pending git commit |
+| 1 — Mobile UI & Navigation | **Changes made:** Fixed Recent Transactions panel height overflow on the Transfer page (capped with `max-h` + `overflow-y-auto` scroll); fixed Docs nav link to redirect to Stellar developer docs instead of a 404 page; improved mobile drawer UX; ensured responsive layout integrity across Transfer, Dashboard, and Navbar on all screen sizes. | [`dff7fa9`](https://github.com/AyushmanGupta21/Parallax/commit/dff7fa9) |
 
-> Commit link will be added once all current UI changes are pushed to the repository.
+> Changes are live on [main](https://github.com/AyushmanGupta21/Parallax/commit/dff7fa9).
 
 ---
 
@@ -443,6 +444,22 @@ Responses are tracked in the [Feedback Sheet](https://docs.google.com/spreadshee
 - [ ] Dashboard analytics — track API call counts per address using on-chain events
 - [ ] CoinGecko Pro API integration for higher rate limits and more pairs
 - [ ] Passphrase-based API key signing for stronger authentication
+
+---
+
+## 18. Submission Checklist
+
+- [x] Live demo link added to Section 13 — [parallaax.vercel.app](https://parallaax.vercel.app/)
+- [ ] Demo video (screen recording) link added to Section 13
+- [x] Google Form link added to Section 13 — [forms.gle/VFmbcgKBwLawk9jSA](https://forms.gle/VFmbcgKBwLawk9jSA)
+- [x] Feedback sheet link added to Section 13 — [View Sheet](https://docs.google.com/spreadsheets/d/1H7KHsjj_p_t2HMDuYbpnyA59RtXjy_dg5OoTbvGAxW0/edit?usp=sharing)
+- [ ] 5+ real Testnet user wallet addresses added to Table 1 (Section 14)
+- [ ] Table 2 filled with actual feedback and commit links (Section 14)
+- [ ] Iteration notes filled in Section 15
+- [x] Screenshots added to `./public/screenshots/` directory (Section 12) — 2 of 5 added
+- [x] GitHub repository is public — [AyushmanGupta21/Parallax](https://github.com/AyushmanGupta21/Parallax)
+
+---
 
 ## Contract Reference
 
