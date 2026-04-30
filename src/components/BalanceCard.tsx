@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Coins, RefreshCw, Activity, ArrowDownLeft, ArrowUpRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import { fetchXLMBalance, fetchRecentPayments } from "@/lib/stellar";
 
@@ -38,96 +36,99 @@ export function BalanceCard({ publicKey, className }: Props) {
     const usdValue = balance ? (parseFloat(balance) * 0.11).toFixed(2) : null;
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className={`glass-card rounded-[32px] p-8 relative overflow-hidden group flex flex-col justify-between h-full ${className}`}
-        >
-            <div className="relative z-10 w-full">
-                <div className="flex items-center justify-between mb-8">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                            <Coins size={22} className="text-white" />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase">Testnet Balance</p>
-                            <p className="text-base font-bold text-white">Native XLM</p>
-                        </div>
+        <div className={`flex flex-col gap-6 ${className || ""}`}>
+            {/* Balance Card */}
+            <div className="bg-[#0b0c0e] border border-white/5 rounded-[12px] p-5 sm:p-8 relative overflow-hidden shrink-0 shadow-lg">
+                <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                    <span className="material-symbols-outlined text-[90px]" style={{ fontVariationSettings: "'FILL' 1" }}>account_balance_wallet</span>
+                </div>
+                <div className="relative z-10">
+                    <div className="flex justify-between items-start mb-4">
+                        <h3 className="font-bold text-[12px] text-[#8a8f9e] uppercase tracking-[0.1em]">Available Liquidity</h3>
+                        <button
+                            onClick={() => load(true)}
+                            disabled={refreshing}
+                            className="w-8 h-8 rounded-[8px] bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors disabled:opacity-50"
+                        >
+                            <span className={`material-symbols-outlined text-[16px] text-[#8a8f9e] ${refreshing ? "animate-spin" : ""}`}>sync</span>
+                        </button>
                     </div>
-                    <button
-                        onClick={() => load(true)}
-                        disabled={refreshing}
-                        className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors text-white/40 hover:text-white"
-                    >
-                        <RefreshCw size={18} className={refreshing ? "animate-spin" : ""} />
-                    </button>
+
+                    {loading ? (
+                        <div className="space-y-2 py-2">
+                            <div className="h-10 w-40 bg-white/5 animate-pulse rounded" />
+                            <div className="h-4 w-24 bg-white/5 animate-pulse rounded mt-2" />
+                        </div>
+                    ) : error ? (
+                        <p className="text-red-400 font-medium text-[14px] py-4">{error}</p>
+                    ) : (
+                        <div className="py-2">
+                            <div className="font-mono text-[36px] font-bold text-[#f0f0f2] tracking-tight mb-1 flex items-baseline gap-2">
+                                {balance} <span className="text-[16px] text-[#8a8f9e] font-sans font-medium">XLM</span>
+                            </div>
+                            {usdValue && (
+                                <div className="text-[14px] font-medium text-[#8a8f9e]">≈ ${usdValue} USD</div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Recent Transactions Card */}
+            <div className="bg-[#0b0c0e] border border-white/5 rounded-[12px] p-5 sm:p-8 flex flex-col shadow-lg">
+                <div className="mb-4 shrink-0">
+                    <h3 className="font-bold text-[11px] text-[#8a8f9e] uppercase tracking-[0.15em]">Recent Transactions</h3>
                 </div>
 
                 {loading ? (
-                    <div className="space-y-3 py-2">
-                        <div className="h-10 w-48 bg-white/5 animate-pulse rounded-xl" />
-                        <div className="h-5 w-24 bg-white/5 animate-pulse rounded-lg" />
+                    <div className="space-y-3 mt-2">
+                        {[1, 2, 3].map(i => (
+                            <div key={i} className="h-[68px] rounded-[12px] bg-white/5 animate-pulse" />
+                        ))}
                     </div>
-                ) : error ? (
-                    <p className="text-red-400 bg-red-500/10 p-4 rounded-xl border border-red-500/20 text-sm font-medium">{error}</p>
+                ) : payments.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center flex-grow text-center">
+                        <span className="material-symbols-outlined text-[40px] text-white/10 mb-3">history</span>
+                        <p className="text-[14px] font-medium text-[#8a8f9e]">No recent transactions</p>
+                    </div>
                 ) : (
-                    <div className="py-2">
-                        <div className="flex items-baseline gap-3 mb-1">
-                            <span className="text-5xl sm:text-6xl font-black font-grotesk text-white tracking-tight">
-                                {balance}
-                            </span>
-                            <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-600">XLM</span>
-                        </div>
-                        <p className="text-slate-400 font-medium">≈ ${usdValue} USD</p>
-                    </div>
-                )}
+                    <div className="overflow-y-auto pr-2 space-y-[12px] max-h-[320px] styled-scrollbar">
+                        {payments.map((p) => {
+                            const amt = p.amount || p.starting_balance || "0";
+                            const isReceived = p.to === publicKey || p.account === publicKey;
+                            const displayAmount = parseFloat(amt).toFixed(2);
+                            const rawCounterparty = isReceived ? (p.from || p.funder || "") : (p.to || "");
+                            
+                            const counterparty = rawCounterparty
+                                ? ((rawCounterparty).slice(0, 15) + "...")
+                                : "Unknown";
 
-                {/* Transaction History Section */}
-                {!loading && payments.length > 0 && (
-                    <div className="mt-6 flex-1 max-h-[520px] overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-thumb]:rounded-full">
-                        <h4 className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-3">Recent Transactions</h4>
-                        <div className="space-y-2">
-                            {payments.map((p) => {
-                                // some payments might be create_account, check if amount exists
-                                const amount = p.amount || p.starting_balance || "0";
-                                const isReceived = p.to === publicKey || p.account === publicKey; // account is for create
-                                const displayAmount = parseFloat(amount).toFixed(2);
-
-                                return (
-                                    <div key={p.id} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
-                                        <div className="flex items-center gap-3">
-                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isReceived ? "bg-emerald-500/10 text-emerald-400" : "bg-white/10 text-white"}`}>
-                                                {isReceived ? <ArrowDownLeft size={14} /> : <ArrowUpRight size={14} />}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium text-white">{isReceived ? "Received" : "Sent"}</p>
-                                                <p className="text-[10px] text-white/40 font-mono truncate w-24">
-                                                    {isReceived ? p.from || p.funder : p.to || "Unknown"}
-                                                </p>
-                                            </div>
+                            return (
+                                <div key={p.id} className="bg-[#121316] border border-white/5 rounded-[12px] p-[16px] flex items-center justify-between hover:bg-[#16181d] transition-colors group">
+                                    <div className="flex items-center gap-[16px]">
+                                        <div className="w-[42px] h-[42px] rounded-full bg-[#1c1d21] flex items-center justify-center shrink-0 border border-white/5 group-hover:border-white/10 transition-colors">
+                                            <span className={`material-symbols-outlined text-[18px] ${isReceived ? "text-[#00c8d4]" : "text-[#f0f0f2]"}`}>
+                                                {isReceived ? "south_west" : "north_east"}
+                                            </span>
                                         </div>
-                                        <div className={`text-sm font-bold font-mono ${isReceived ? "text-emerald-400" : "text-white"}`}>
-                                            {isReceived ? "+" : "-"}{displayAmount} XLM
+                                        <div className="flex flex-col justify-center">
+                                            <div className="font-bold text-[15px] text-[#f0f0f2] leading-tight mb-[2px]">
+                                                {isReceived ? "Received" : "Sent"}
+                                            </div>
+                                            <div className="text-[10px] font-bold uppercase tracking-wider text-[#565d70]">
+                                                {counterparty}
+                                            </div>
                                         </div>
                                     </div>
-                                );
-                            })}
-                        </div>
+                                    <div className={`font-mono text-[14px] font-bold ${isReceived ? "text-[#00c8d4]" : "text-[#f0f0f2]"}`}>
+                                        {isReceived ? "+" : "-"}{displayAmount} XLM
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 )}
-
-                <div className="flex items-center gap-6 mt-auto pt-6 border-t border-white/5 shrink-0">
-                    <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wide">
-                        <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        <span>Testnet Active</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-wide">
-                        <Activity size={14} />
-                        <span>Horizon Live</span>
-                    </div>
-                </div>
             </div>
-        </motion.div>
+        </div>
     );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Wallet, ChevronDown, LogOut, Copy, CheckCheck } from "lucide-react";
 import { useState } from "react";
 import { WalletState } from "@/hooks/useWallet";
 
@@ -30,8 +29,8 @@ export function WalletButton({ wallet, onConnect, onDisconnect, isLoading }: Pro
 
     if (wallet.isChecking) {
         return (
-            <div className="flex items-center gap-2 px-5 py-2.5 rounded-full glass border border-blue-500/20 text-slate-400 text-sm">
-                <div className="w-3 h-3 rounded-full border-2 border-blue-500/50 border-t-transparent animate-spin" />
+            <div className="flex items-center gap-[8px] px-[16px] py-[6px] text-[13px] font-medium bg-transparent border border-white/10 text-[#8a8f9e] rounded-[6px]">
+                <div className="w-[12px] h-[12px] rounded-full border-[2px] border-[#8a8f9e]/50 border-t-transparent animate-spin" />
                 Checking...
             </div>
         );
@@ -39,57 +38,39 @@ export function WalletButton({ wallet, onConnect, onDisconnect, isLoading }: Pro
 
     if (!wallet.isConnected) {
         return (
-            <motion.button
+            <button
                 id="connect-wallet-btn"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
                 onClick={onConnect}
                 disabled={isLoading}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-full btn-primary text-white text-sm font-semibold relative z-10 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="px-[16px] py-[8px] text-[13px] font-bold text-[#0b0c0e] bg-gradient-to-r from-[#8aebff] to-[#00c8d4] border-none rounded-[6px] hover:brightness-110 shadow-[0_0_15px_rgba(0,200,212,0.3)] hover:shadow-[0_0_25px_rgba(0,200,212,0.5)] transition-all whitespace-nowrap flex items-center gap-[8px] disabled:opacity-60 disabled:cursor-not-allowed"
             >
                 {isLoading ? (
                     <>
-                        <div className="w-4 h-4 rounded-full border-2 border-white/40 border-t-white animate-spin" />
+                        <div className="w-[12px] h-[12px] rounded-full border-[2px] border-[#0d0e10]/40 border-t-[#0d0e10] animate-spin" />
                         Connecting...
                     </>
                 ) : (
-                    <>
-                        <Wallet size={16} />
-                        Connect Wallet
-                    </>
+                    "Connect Wallet"
                 )}
-            </motion.button>
+            </button>
         );
     }
 
     return (
         <div className="relative z-50">
-            <motion.button
+            <button
                 id="wallet-menu-btn"
-                whileHover={{ scale: 1.02 }}
                 onClick={() => setMenuOpen((prev) => !prev)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full glass-strong border border-blue-500/30 text-sm font-medium"
+                className="flex items-center gap-[8px] px-[12px] py-[6px] rounded-[6px] text-[13px] font-medium bg-[#13151a] border border-white/10 text-[#f0f0f2] hover:bg-[#161820] transition-colors active:scale-95"
             >
-                {/* Status dot */}
-                <span className="w-2 h-2 rounded-full bg-emerald-400 blink" />
-                <span className="text-slate-300 font-mono-custom text-xs">
+                <span className="w-[8px] h-[8px] rounded-full bg-[#22c55e] animate-pulse" />
+                <span className="font-mono text-[12px]">
                     {truncate(wallet.publicKey!)}
                 </span>
-                {wallet.network && (
-                    <span className="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-xs uppercase">
-                        {wallet.network}
-                    </span>
-                )}
-                {wallet.walletId && (
-                    <span className="px-2 py-0.5 rounded-full bg-white/10 text-white/70 text-[10px] uppercase">
-                        {wallet.walletId}
-                    </span>
-                )}
-                <ChevronDown
-                    size={14}
-                    className={`text-slate-400 transition-transform ${menuOpen ? "rotate-180" : ""}`}
-                />
-            </motion.button>
+                <svg className="w-[14px] h-[14px] text-[#8a8f9e] transition-transform" style={{ transform: menuOpen ? "rotate(180deg)" : "none" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
 
             <AnimatePresence>
                 {menuOpen && (
@@ -98,27 +79,35 @@ export function WalletButton({ wallet, onConnect, onDisconnect, isLoading }: Pro
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -8, scale: 0.95 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute right-0 mt-2 w-64 glass-strong rounded-2xl p-1 shadow-2xl border border-blue-500/20"
+                        className="absolute right-0 mt-2 w-64 bg-[#13151a] border border-white/10 rounded-lg p-2 shadow-2xl"
                     >
-                        <div className="px-4 py-3 border-b border-white/5">
-                            <p className="text-xs text-slate-500 mb-1">Connected Address</p>
-                            <p className="text-xs font-mono-custom text-slate-300 break-all">
+                        <div className="px-3 py-3 border-b border-white/5 mb-2">
+                            <p className="text-[10px] font-bold tracking-[0.05em] text-[#8a8f9e] uppercase mb-1">Connected Address</p>
+                            <p className="text-xs font-mono text-[#f0f0f2] break-all">
                                 {wallet.publicKey}
                             </p>
                         </div>
                         <button
                             onClick={handleCopy}
-                            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-slate-300 hover:bg-white/5 transition-colors"
+                            className="w-full flex items-center gap-3 px-3 py-2 rounded text-sm text-[#f0f0f2] hover:bg-white/5 transition-colors"
                         >
-                            {copied ? <CheckCheck size={15} className="text-emerald-400" /> : <Copy size={15} />}
+                            <svg className={`w-4 h-4 ${copied ? 'text-[#22c55e]' : 'text-[#8a8f9e]'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {copied ? (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                ) : (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                )}
+                            </svg>
                             {copied ? "Copied!" : "Copy Address"}
                         </button>
                         <button
                             id="disconnect-wallet-btn"
                             onClick={() => { onDisconnect(); setMenuOpen(false); }}
-                            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-red-400 hover:bg-red-500/10 transition-colors"
+                            className="w-full flex items-center gap-3 px-3 py-2 rounded text-sm text-[#ffb4ab] hover:bg-[#ffb4ab]/10 transition-colors mt-1"
                         >
-                            <LogOut size={15} />
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
                             Disconnect
                         </button>
                     </motion.div>

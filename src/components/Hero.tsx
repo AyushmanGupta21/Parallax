@@ -1,66 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Database, Zap, Activity } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export function Hero() {
     return (
-        <section className="relative min-h-[90vh] w-full bg-black overflow-hidden flex flex-col justify-between px-4 sm:px-6 pb-10 sm:pb-12 pt-28 sm:pt-32 md:pt-40">
-            <div className="flex flex-col items-center justify-center w-full z-10 mt-auto mb-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 100 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    className="select-none text-center"
-                >
-                    <h1 className="text-[16vw] sm:text-[13vw] md:text-[12vw] font-anton font-normal leading-none text-white tracking-wide uppercase mix-blend-difference">
-                        STELLAR<br />ORACLE
-                    </h1>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5, duration: 1 }}
-                    className="mt-8 text-center space-y-4 max-w-2xl mx-auto"
-                >
-                    <p className="text-sm md:text-lg tracking-[0.3em] uppercase text-white/40 font-outfit">
-                        Aggregated Price Feeds for
-                    </p>
-                    <p className="font-serif text-2xl sm:text-3xl md:text-5xl italic text-white leading-tight">
-                        Soroban & Native Assets.
-                    </p>
-                </motion.div>
-            </div>
-
-            <div className="w-full flex justify-between items-end z-30 pointer-events-none mt-12 md:mt-0">
-                <div className="flex flex-col items-center gap-3">
-                    <Database className="w-5 h-5 text-emerald-500" />
-                    <div className="text-xs md:text-sm tracking-wider uppercase text-center font-display">
-                        <span className="text-white font-medium">Protocol 21</span>
-                        <br />
-                        <span className="text-white/50">Ready</span>
-                    </div>
-                </div>
-
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1 }}
-                    className="hidden md:block absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-white/30"
-                >
-                    <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-white/50 to-transparent"></div>
-                </motion.div>
-
-                <div className="flex flex-col items-center gap-3">
-                    <Zap className="w-5 h-5 text-cyan-500" />
-                    <div className="text-xs md:text-sm tracking-wider uppercase text-center font-display">
-                        <span className="text-white font-medium">Latency</span>
-                        <br />
-                        <span className="text-white/50">&lt; 2s Finality</span>
-                    </div>
-                </div>
-            </div>
+        <section className="flex flex-col items-center text-center mt-20 mb-32 w-full">
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="glass-panel px-4 py-1.5 rounded-full mb-8 inline-flex items-center gap-2"
+            >
+                <span className="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(102,221,139,0.5)]"></span>
+                <span className="font-label-caps text-label-caps text-on-surface-variant">Stellar Mainnet Active</span>
+            </motion.div>
+            
+            <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="font-display text-display md:text-[72px] lg:text-[88px] text-on-background max-w-4xl leading-[1.05] tracking-tight mb-8"
+            >
+                The Oracle for Stellar's <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-fixed to-tertiary-fixed">Next Frontier</span>
+            </motion.h1>
+            
+            <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12"
+            >
+                Institutional-grade infrastructure delivering verifiable data and seamless cross-chain interoperability with absolute precision.
+            </motion.p>
+            
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-col sm:flex-row items-center gap-6"
+            >
+                <Link href="/dashboard" className="button-primary text-white font-body-md text-body-md font-medium px-8 py-4 rounded-lg hover:shadow-[0_0_30px_rgba(15,82,186,0.4)] transition-all duration-300 min-w-[200px] text-center">
+                    Get Started
+                </Link>
+                <Link href="/dashboard" className="glass-panel text-on-surface font-body-md text-body-md font-medium px-8 py-4 rounded-lg hover:bg-white/5 transition-all duration-300 min-w-[200px] flex items-center justify-center gap-2">
+                    Explore Dashboard
+                    <ArrowRight className="w-4 h-4" />
+                </Link>
+            </motion.div>
         </section>
     );
 }

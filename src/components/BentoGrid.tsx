@@ -1,118 +1,76 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BalanceCard } from "./BalanceCard";
-import { SendXLMForm } from "./SendXLMForm";
-import { ApiKeyCard } from "./ApiKeyCard";
-import { PriceDataCard } from "./PriceDataCard";
-import { useWallet } from "@/hooks/useWallet";
-import { Shield, Activity, Globe, Zap } from "lucide-react";
+import { Shield, Key, Activity, RefreshCw } from "lucide-react";
 
 export function BentoGrid() {
-  const { wallet, connect } = useWallet();
-
   return (
-    <section id="dashboard" className="px-4 sm:px-6 py-16 sm:py-20 max-w-7xl mx-auto">
-      {/* ── Row 1: Network Status + Global + Wallet/Balance ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
-
-        {/* Card 1: Network Status */}
-        <motion.div
-          className="glass-card rounded-[32px] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group min-h-[240px] sm:min-h-[280px]"
-          whileHover={{ scale: 0.98 }}
-        >
-          <div className="flex justify-between items-start">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5">
-              <Activity size={22} className="text-white" />
+    <div className="w-full flex flex-col items-center">
+        {/* Stats Row */}
+        <section className="glass-panel rounded-xl p-8 mb-32 w-full">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/10">
+                <div className="flex flex-col items-center justify-center">
+                    <span className="font-h2 text-h2 text-primary-fixed mb-1">Active</span>
+                    <span className="font-label-caps text-label-caps text-outline-variant">Testnet</span>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                    <span className="font-h2 text-h2 text-primary-fixed mb-1">99.9%</span>
+                    <span className="font-label-caps text-label-caps text-outline-variant">Uptime</span>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                    <span className="font-h2 text-h2 text-primary-fixed mb-1">Verified</span>
+                    <span className="font-label-caps text-label-caps text-outline-variant">Contract</span>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                    <span className="font-h2 text-h2 text-primary-fixed mb-1">&lt;5s</span>
+                    <span className="font-label-caps text-label-caps text-outline-variant">Finality</span>
+                </div>
             </div>
-            <div className="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-widest font-bold text-white/50">
-              System Health
+        </section>
+
+        {/* Features Bento Grid */}
+        <section className="mb-32 w-full">
+            <div className="flex flex-col items-center text-center mb-16">
+                <h2 className="font-h1 text-h1 text-on-background mb-4">Core Infrastructure</h2>
+                <p className="font-body-md text-body-md text-on-surface-variant max-w-xl">Machined for absolute reliability and verifiable truth on-chain.</p>
             </div>
-          </div>
-          <div>
-            <h3 className="text-3xl sm:text-4xl font-anton text-white uppercase leading-none mb-2">Testnet<br />Live</h3>
-            <p className="font-serif italic text-white/50 text-sm sm:text-base">Horizon Protocol 21.0</p>
-          </div>
-          <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mt-4">
-            <div className="w-full h-full bg-emerald-500 animate-pulse origin-left" />
-          </div>
-        </motion.div>
-
-        {/* Card 2: Global Coverage */}
-        <motion.div
-          className="glass-card rounded-[32px] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group bg-[#0a0a0a] min-h-[240px] sm:min-h-[280px]"
-          whileHover={{ scale: 0.98 }}
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent opacity-20" />
-          <div className="flex justify-between items-start relative z-10">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5">
-              <Globe size={22} className="text-white" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Feature 1: Large Panel */}
+                <div className="glass-panel rounded-xl p-8 lg:col-span-2 group hover:bg-white/[0.02] transition-colors duration-500 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary-container/10 rounded-full blur-[60px] group-hover:bg-primary-container/20 transition-all duration-500"></div>
+                    <div className="relative z-10">
+                        <Shield className="w-8 h-8 text-primary-fixed mb-6 block" strokeWidth={1.5} />
+                        <h3 className="font-h2 text-h2 text-on-background mb-3">Wallet Authentication</h3>
+                        <p className="font-body-md text-body-md text-on-surface-variant max-w-md">Multi-signature protocol utilizing advanced cryptographic primitives to ensure secure, verifiable identity mapping across networks.</p>
+                    </div>
+                </div>
+                
+                {/* Feature 2: Small Panel */}
+                <div className="glass-panel rounded-xl p-8 group hover:bg-white/[0.02] transition-colors duration-500">
+                    <Key className="w-8 h-8 text-primary-fixed mb-6 block" strokeWidth={1.5} />
+                    <h3 className="font-h2 text-h2 text-on-background mb-3">On-chain Registration</h3>
+                    <p className="font-body-md text-body-md text-on-surface-variant">Immutable ledger entry for all active nodes, ensuring transparent consensus participation.</p>
+                </div>
+                
+                {/* Feature 3: Small Panel */}
+                <div className="glass-panel rounded-xl p-8 group hover:bg-white/[0.02] transition-colors duration-500">
+                    <Activity className="w-8 h-8 text-primary-fixed mb-6 block" strokeWidth={1.5} />
+                    <h3 className="font-h2 text-h2 text-on-background mb-3">Price Feeds</h3>
+                    <p className="font-body-md text-body-md text-on-surface-variant">Sub-second latency data delivery from decentralized, authenticated institutional sources.</p>
+                </div>
+                
+                {/* Feature 4: Large Panel */}
+                <div className="glass-panel rounded-xl p-8 lg:col-span-2 group hover:bg-white/[0.02] transition-colors duration-500 relative overflow-hidden">
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-tertiary-container/10 rounded-full blur-[60px] group-hover:bg-tertiary-container/20 transition-all duration-500"></div>
+                    <div className="relative z-10">
+                        <RefreshCw className="w-8 h-8 text-primary-fixed mb-6 block" strokeWidth={1.5} />
+                        <h3 className="font-h2 text-h2 text-on-background mb-3">Secure Transaction Flow</h3>
+                        <p className="font-body-md text-body-md text-on-surface-variant max-w-md">End-to-end encrypted messaging layer facilitating cross-chain asset transfers with guaranteed finality and rollback protection.</p>
+                    </div>
+                </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Zap size={14} className="text-yellow-400 fill-yellow-400" />
-              <span className="text-xs font-bold text-white">45ms</span>
-            </div>
-          </div>
-          <div className="relative z-10">
-            <h3 className="text-2xl sm:text-3xl font-anton text-white uppercase leading-none mb-2">Global<br />Coverage</h3>
-            <p className="text-xs text-white/40 font-outfit uppercase tracking-widest">
-              San Francisco • Frankfurt • Singapore
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Card 3: Wallet / Balance (tall) */}
-        <div className="sm:col-span-2 lg:col-span-1">
-          {!wallet.isConnected ? (
-            <motion.div
-              className="glass-card rounded-[32px] p-6 sm:p-8 h-full min-h-[280px] flex flex-col justify-center items-center text-center relative overflow-hidden group cursor-pointer"
-              onClick={connect}
-              whileHover={{ scale: 0.98 }}
-            >
-              <div className="mb-6 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                <Shield size={40} className="text-white opacity-50 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <h3 className="text-4xl sm:text-5xl font-anton text-white uppercase mb-4">Connect<br />Wallet</h3>
-              <p className="font-serif italic text-white/50 text-lg sm:text-xl max-w-[200px]">
-                Unlock the developer console.
-              </p>
-              <div className="mt-6 px-6 sm:px-8 py-3 bg-white text-black font-bold rounded-full uppercase tracking-widest text-xs hover:bg-neutral-200 transition-colors">
-                Authenticate
-              </div>
-            </motion.div>
-          ) : (
-            <BalanceCard publicKey={wallet.publicKey!} className="h-full min-h-[280px]" />
-          )}
-        </div>
-      </div>
-
-      {/* ── Row 2: Send Form + API Key Card ── */}
-      {wallet.isConnected && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
-          <SendXLMForm publicKey={wallet.publicKey!} className="h-full" />
-          <ApiKeyCard className="h-full" />
-        </div>
-      )}
-
-      {/* ── Row 3: Price Data (full width when connected) ── */}
-      {wallet.isConnected && (
-        <div>
-          <PriceDataCard publicKey={wallet.publicKey!} className="h-full" />
-        </div>
-      )}
-
-      {/* Disconnected placeholder rows */}
-      {!wallet.isConnected && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-          {[0, 1].map((i) => (
-            <motion.div key={i} className="glass-card rounded-[32px] min-h-[240px] flex items-center justify-center p-8 bg-[#080808]">
-              <p className="text-white/20 font-anton text-3xl sm:text-4xl uppercase tracking-wide text-center">
-                Authentication<br />Required
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      )}
-    </section>
+        </section>
+    </div>
   );
 }
