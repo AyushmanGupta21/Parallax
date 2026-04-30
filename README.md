@@ -392,12 +392,28 @@ Responses are tracked in the [Feedback Sheet](https://docs.google.com/spreadshee
 
 ### Iterations Made Based on Feedback
 
-| Iteration | Description | Commit |
-|---|---|---|
-| 1 — Mobile UI & Navigation | **Changes made:** Fixed Recent Transactions panel height overflow on the Transfer page (capped with `max-h` + `overflow-y-auto` scroll); fixed Docs nav link to redirect to Stellar developer docs instead of a 404 page; improved mobile drawer UX; ensured responsive layout integrity across Transfer, Dashboard, and Navbar on all screen sizes. | [`dff7fa9`](https://github.com/AyushmanGupta21/Parallax/commit/dff7fa9) |
-| 2 — API Key Empty State | **Changes made:** Replaced the misleading password-dots input shown before key generation with a clear dashed empty state displaying "No key generated yet". The real input field with show/hide toggle and copy button now only renders once the user has a registered API key, eliminating confusion for first-time users. | [`265c9bf`](https://github.com/AyushmanGupta21/Parallax/commit/265c9bf) |
+| Iteration | User Feedback | Changes Made | Commit |
+|---|---|---|---|
+| 1 — Mobile UI & Navigation | *"Some of the contents on the mobile isn't properly navigable"* — Devargho Chakraborty | Fixed Recent Transactions panel height overflow on the Transfer page; fixed Docs nav link to redirect to Stellar developer docs; improved mobile drawer UX; ensured responsive layout integrity across Transfer, Dashboard, and Navbar. | [`dff7fa9`](https://github.com/AyushmanGupta21/Parallax/commit/dff7fa9) |
+| 2 — API Key Empty State | *"In the placeholder it is showing I have API but its not that, fix the UX so it would look like a empty area"* — Archishman Sarkar | Replaced the misleading password-dots input shown before key generation with a clean dashed empty state displaying "No key generated yet". The real input with show/hide toggle and copy button now only renders once a key exists. | [`265c9bf`](https://github.com/AyushmanGupta21/Parallax/commit/265c9bf) |
+| 3 — API Usage Guide | *"Would be better if a guide can be added on how to use the API"* — Sushovan Ghosh | **Planned for next phase** — An in-app API documentation page will be added to the Dashboard, covering authentication headers, available endpoints, example `curl` requests, and sample API responses. | 🔜 Planned |
+| 4 — Landing Page Description | *"If a more detail description could be added about the website in the landing page"* — Arunava Bhol | **Planned for next phase** — The hero section of the landing page will be expanded with a detailed product walkthrough, a step-by-step "How it works" section, and richer copy explaining the on-chain authentication model to new visitors. | 🔜 Planned |
+| 5 — Transfer Button Sizing | *"Make the confirm transfer button small, other things is fine"* — Satyaki Mukherjee | **Planned for next phase** — The Confirm Transfer CTA will be resized to a standard-width button aligned with the form field width, replacing the current full-width layout to reduce visual weight and improve form proportions. | 🔜 Planned |
 
-> Changes are live on [main](https://github.com/AyushmanGupta21/Parallax).
+> Iterations 1 and 2 are live on [`main`](https://github.com/AyushmanGupta21/Parallax). Iterations 3–5 are scheduled for the next development phase.
+
+### Next Phase: Evolution Plan Based on User Feedback
+
+The following improvements are planned for the next version of Parallax, directly driven by the feedback collected from the 5+ registered testnet users above:
+
+| # | Planned Improvement | Based On | Priority |
+|---|---|---|---|
+| 1 | **In-app API Documentation** — A dedicated `/docs` page inside the dashboard with endpoint reference, authentication guide, and live `curl` examples | Sushovan Ghosh's feedback | High |
+| 2 | **Expanded Landing Page** — Detailed product walkthrough and "How it works" section with step-by-step explanation of the on-chain registration model | Arunava Bhol's feedback | High |
+| 3 | **Transfer Button Redesign** — Resize the Confirm Transfer button to standard form width instead of full-width for better UI proportions | Satyaki Mukherjee's feedback | Medium |
+| 4 | **Transaction Explorer Link on Success** — After a transfer, surface a direct link to the transaction hash on Stellar Expert so users get immediate on-chain confirmation | Internal UX review | Medium |
+| 5 | **Wallet Account Change Detection** — Detect when the user switches accounts in Freighter and auto-refresh the dashboard without requiring a manual reconnect | Internal UX review | Low |
+
 
 ---
 
