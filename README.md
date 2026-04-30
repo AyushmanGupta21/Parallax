@@ -42,9 +42,6 @@
 13. [Level 5 User Validation](#13-level-5-user-validation)
 14. [User Tables](#14-user-tables)
 15. [Feedback and Iteration](#15-feedback-and-iteration)
-16. [Known Limitations](#16-known-limitations)
-17. [Next Steps](#17-next-steps)
-18. [Submission Checklist](#18-submission-checklist)
 
 ---
 
@@ -371,46 +368,26 @@ The following flows have been built, integrated, and verified end-to-end on Stel
 
 ## 14. User Tables
 
-### Table 1: Testnet Users
+### Testnet Users
 
-| # | User Name | User Email | User Wallet Address | Explorer Link | Status |
-|---|---|---|---|---|---|
-| 1 | Devargho Chakraborty | devarghochakraborty7@gmail.com | `GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7) | ✅ Registered |
-| 2 | Archishman Sarkar | archishmansarkar94@gmail.com | `GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD) | ✅ Registered |
-| 3 | TBD | TBD | TBD | TBD | TBD |
-| 4 | TBD | TBD | TBD | TBD | TBD |
-| 5 | TBD | TBD | TBD | TBD | TBD |
+| # | User Name | User Email | User Wallet Address | Explorer Link | Feedback | Status |
+|---|---|---|---|---|---|---|
+| 1 | Devargho Chakraborty | devarghochakraborty7@gmail.com | `GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7) | Mobile UI and navigation needs improvement | ✅ Registered |
+| 2 | Archishman Sarkar | archishmansarkar94@gmail.com | `GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD) | API key placeholder looks like a key already exists | ✅ Registered |
+| 3 | Sushovan Ghosh | gamingdeadlydevils@gmail.com | `GCNVRQ2GHNYHUJSDOLGD4K7JXRY4V7XFAOTY5L4CBWTIUZ2NM4AV5NP5` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GCNVRQ2GHNYHUJSDOLGD4K7JXRY4V7XFAOTY5L4CBWTIUZ2NM4AV5NP5) | Everything works well, would like an API usage guide | ✅ Registered |
+| 4 | Arunava Bhol | sg9499398@gmail.com | `GBT2EHJKQAWW46QRJUY343YGEJDEPIU3U77S2R7ZXLP4NYQFUTGY3PRP` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBT2EHJKQAWW46QRJUY343YGEJDEPIU3U77S2R7ZXLP4NYQFUTGY3PRP) | Overall experience is nice, would like more detailed description about the website on the landing page | ✅ Registered |
+| 5 | TBD | TBD | TBD | TBD | TBD | TBD |
 
 > **Instructions for reviewers:** Each user connects their Freighter wallet to the live demo, completes on-chain registration (pays 10 XLM), and their registration is independently verifiable at the contract explorer link in Section 13.
 
 ---
 
-### Table 2: Feedback & Implementation
-
-| # | User Name | User Email | User Wallet Address | User Feedback | Improvement Made | Commit ID / Commit Link |
-|---|---|---|---|---|---|---|
-| 1 | Devargho Chakraborty | devarghochakraborty7@gmail.com | `GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7` | Mobile UI and navigation needs improvement — some content on mobile is not properly navigable | Rewrote mobile layout across Transfer, Dashboard and Navbar: fixed Recent Transactions panel height overflow, added scrollable transaction list, fixed Docs nav link, improved mobile drawer UX | [`dff7fa9`](https://github.com/AyushmanGupta21/Parallax/commit/dff7fa9) |
-| 2 | Archishman Sarkar | archishmansarkar94@gmail.com | `GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD` | API key placeholder shows password-dots when no key has been generated yet — looks like a key already exists | Replaced misleading password-dots input with a clean dashed empty state ("No key generated yet") when user is not registered; real input with show/hide and copy only appears after key is generated | [`265c9bf`](https://github.com/AyushmanGupta21/Parallax/commit/265c9bf) |
-| 3 | TBD | TBD | TBD | TBD | TBD | TBD |
-| 4 | TBD | TBD | TBD | TBD | TBD | TBD |
-| 5 | TBD | TBD | TBD | TBD | TBD | TBD |
-
----
-
 ## 15. Feedback and Iteration
 
-> This section will be completed after user testing sessions. Placeholder structure is provided below.
-
 ### Feedback Collection Process
-Users are recruited to connect their Freighter Testnet wallet to the live demo at [parallaax.vercel.app](https://parallaax.vercel.app/), complete on-chain registration, and access the price feed API. Feedback is gathered via the [Google Form](https://forms.gle/VFmbcgKBwLawk9jSA) covering:
-- Ease of wallet connection
-- Clarity of the registration flow and fee
-- Usefulness of the price data shown
-- Any errors or confusion encountered
+Users are recruited to connect their Freighter Testnet wallet to the live demo at [parallaax.vercel.app](https://parallaax.vercel.app/), complete on-chain registration, and access the price feed API. Feedback is gathered via the [Google Form](https://forms.gle/VFmbcgKBwLawk9jSA).
 
 Responses are tracked in the [Feedback Sheet](https://docs.google.com/spreadsheets/d/1H7KHsjj_p_t2HMDuYbpnyA59RtXjy_dg5OoTbvGAxW0/edit?usp=sharing).
-
-> User feedback is live — responses tracked in the [Feedback Sheet](https://docs.google.com/spreadsheets/d/1H7KHsjj_p_t2HMDuYbpnyA59RtXjy_dg5OoTbvGAxW0/edit?usp=sharing).
 
 ### Iterations Made Based on Feedback
 
@@ -420,45 +397,6 @@ Responses are tracked in the [Feedback Sheet](https://docs.google.com/spreadshee
 | 2 — API Key Empty State | **Changes made:** Replaced the misleading password-dots input shown before key generation with a clear dashed empty state displaying "No key generated yet". The real input field with show/hide toggle and copy button now only renders once the user has a registered API key, eliminating confusion for first-time users. | [`265c9bf`](https://github.com/AyushmanGupta21/Parallax/commit/265c9bf) |
 
 > Changes are live on [main](https://github.com/AyushmanGupta21/Parallax).
-
----
-
-## 16. Known Limitations
-
-- **Testnet only** — All blockchain interactions use Stellar Testnet. No mainnet support in this MVP.
-- **Freighter-only** — The wallet integration is implemented for Freighter. Other wallets (e.g. Albedo, xBull) are listed in the Stellar Wallets Kit but not tested.
-- **Contract ID placeholder fallback** — If `NEXT_PUBLIC_CONTRACT_ID` is unset or left as the placeholder value, registration checks are skipped and the API fails open on the on-chain step. The env var is set in the deployed version.
-- **CoinGecko rate limits** — The unauthenticated CoinGecko API may throttle under heavy concurrent usage. A 30-second cache is in place to mitigate this.
-- **API key security** — The API key is deterministically derived from the public key (not cryptographically signed). It is suitable for demonstration purposes but not production hardening.
-- **USD balance estimate** — The USD value shown on the balance card uses a fixed approximate rate, not a live conversion.
-- **Testnet account funding** — New users must fund their Testnet account via Friendbot before they can pay the registration fee.
-
----
-
-## 17. Next Steps
-
-- [ ] Mainnet deployment with a reduced or configurable registration fee
-- [ ] Multi-wallet support (Albedo, xBull, WalletConnect via SWK)
-- [ ] Additional price pairs (USDC/BTC, BTC/ETH) with order book depth display
-- [ ] API key rotation mechanism on-chain (revoke & re-register)
-- [ ] Rate limiting per registered address on the price API
-- [ ] Dashboard analytics — track API call counts per address using on-chain events
-- [ ] CoinGecko Pro API integration for higher rate limits and more pairs
-- [ ] Passphrase-based API key signing for stronger authentication
-
----
-
-## 18. Submission Checklist
-
-- [x] Live demo link added to Section 13 — [parallaax.vercel.app](https://parallaax.vercel.app/)
-- [ ] Demo video (screen recording) link added to Section 13
-- [x] Google Form link added to Section 13 — [forms.gle/VFmbcgKBwLawk9jSA](https://forms.gle/VFmbcgKBwLawk9jSA)
-- [x] Feedback sheet link added to Section 13 — [View Sheet](https://docs.google.com/spreadsheets/d/1H7KHsjj_p_t2HMDuYbpnyA59RtXjy_dg5OoTbvGAxW0/edit?usp=sharing)
-- [ ] 5+ real Testnet user wallet addresses added to Table 1 (Section 14)
-- [ ] Table 2 filled with actual feedback and commit links (Section 14)
-- [ ] Iteration notes filled in Section 15
-- [x] Screenshots added to `./public/screenshots/` directory (Section 12) — all 5 added
-- [x] GitHub repository is public — [AyushmanGupta21/Parallax](https://github.com/AyushmanGupta21/Parallax)
 
 ---
 
