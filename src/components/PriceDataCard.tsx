@@ -126,22 +126,26 @@ export function PriceDataCard({ publicKey, className }: Props) {
                         </tbody>
                     </motion.table>
                 ) : loadState === "unregistered" ? (
-                    <motion.div key="lock" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex-1 flex flex-col items-center justify-center text-center p-8">
-                        <span className="material-symbols-outlined text-4xl text-error/80 mb-4">lock</span>
-                        <h3 className="font-headline-md text-headline-md text-on-surface mb-2">Access Denied</h3>
-                        <p className="font-body-md text-body-md text-on-surface-variant max-w-sm">
+                    <motion.div key="lock" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex-1 flex flex-col items-center justify-center text-center px-8 py-12">
+                        <div className="w-14 h-14 rounded-full bg-[#1a1d24] border border-white/10 flex items-center justify-center mb-5">
+                            <span className="material-symbols-outlined text-[28px] text-[#00c8d4]/70">lock</span>
+                        </div>
+                        <h3 className="text-[18px] font-bold text-[#f0f0f2] mb-2">Access Denied</h3>
+                        <p className="text-[14px] leading-[1.6] text-[#565d70] max-w-[320px] w-full">
                             Generate a Production API Key to unlock real-time institutional price feeds.
                         </p>
                     </motion.div>
                 ) : loadState === "error" ? (
-                    <motion.div key="err" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex-1 flex flex-col items-center justify-center text-center p-8">
-                        <span className="material-symbols-outlined text-4xl text-error/80 mb-4">error</span>
-                        <p className="font-body-md text-body-md text-error max-w-sm">{errorMsg}</p>
+                    <motion.div key="err" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex-1 flex flex-col items-center justify-center text-center px-8 py-12">
+                        <div className="w-14 h-14 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-5">
+                            <span className="material-symbols-outlined text-[28px] text-red-400">error</span>
+                        </div>
+                        <p className="text-[14px] leading-[1.6] text-red-400 max-w-[320px] w-full">{errorMsg}</p>
                     </motion.div>
                 ) : (
-                    <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex-1 flex flex-col p-6 space-y-4">
+                    <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex-1 flex flex-col p-6 space-y-3">
                         {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="h-12 rounded bg-surface-container animate-pulse" />
+                            <div key={i} className="h-12 rounded-[8px] bg-white/[0.04] animate-pulse" />
                         ))}
                     </motion.div>
                 )}
