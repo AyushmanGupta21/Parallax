@@ -370,13 +370,13 @@ The following flows have been built, integrated, and verified end-to-end on Stel
 
 ### Testnet Users
 
-| # | User Name | User Email | User Wallet Address | Explorer Link | Feedback | Status |
-|---|---|---|---|---|---|---|
-| 1 | Devargho Chakraborty | devarghochakraborty7@gmail.com | `GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7) | Mobile UI and navigation needs improvement | ✅ Registered |
-| 2 | Archishman Sarkar | archishmansarkar94@gmail.com | `GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD) | API key placeholder looks like a key already exists | ✅ Registered |
-| 3 | Sushovan Ghosh | gamingdeadlydevils@gmail.com | `GCNVRQ2GHNYHUJSDOLGD4K7JXRY4V7XFAOTY5L4CBWTIUZ2NM4AV5NP5` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GCNVRQ2GHNYHUJSDOLGD4K7JXRY4V7XFAOTY5L4CBWTIUZ2NM4AV5NP5) | Everything works well, would like an API usage guide | ✅ Registered |
-| 4 | Arunava Bhol | sg9499398@gmail.com | `GBT2EHJKQAWW46QRJUY343YGEJDEPIU3U77S2R7ZXLP4NYQFUTGY3PRP` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBT2EHJKQAWW46QRJUY343YGEJDEPIU3U77S2R7ZXLP4NYQFUTGY3PRP) | Overall experience is nice, would like more detailed description about the website on the landing page | ✅ Registered |
-| 5 | TBD | TBD | TBD | TBD | TBD | TBD |
+| # | User Name | User Email | Wallet Address | Feedback | Status |
+|---|---|---|---|---|---|
+| 1 | Devargho Chakraborty | devarghochakraborty7@gmail.com | [GBPYN...Y5H7](https://stellar.expert/explorer/testnet/account/GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7) | The way it should be improved is the mobile UI and navigation through it as some of the contents on the mobile isn't properly navigable please see through it and if possible make the changes for the proper | ✅ Registered |
+| 2 | Archishman Sarkar | archishmansarkar94@gmail.com | [GBB63...O6YJD](https://stellar.expert/explorer/testnet/account/GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD) | For the API key generate, at the beginning after wallet connect but not generate api in the placeholder it is showing I have API but its not that, so fix the UX so it would look like a empty area, not that I have already generated one | ✅ Registered |
+| 3 | Sushovan Ghosh | gamingdeadlydevils@gmail.com | [GCNVR...V5NP5](https://stellar.expert/explorer/testnet/account/GCNVRQ2GHNYHUJSDOLGD4K7JXRY4V7XFAOTY5L4CBWTIUZ2NM4AV5NP5) | Everything is properly working the connection and everything, would be better if a guide an be added on how to use the API | ✅ Registered |
+| 4 | Arunava Bhol | sg9499398@gmail.com | [GBT2E...Y3PRP](https://stellar.expert/explorer/testnet/account/GBT2EHJKQAWW46QRJUY343YGEJDEPIU3U77S2R7ZXLP4NYQFUTGY3PRP) | The overall experience is nice, if a more detail description could be added then it would be better about the website in the landing page, else everything is working properly | ✅ Registered |
+| 5 | TBD | TBD | TBD | TBD | TBD |
 
 > **Instructions for reviewers:** Each user connects their Freighter wallet to the live demo, completes on-chain registration (pays 10 XLM), and their registration is independently verifiable at the contract explorer link in Section 13.
 
