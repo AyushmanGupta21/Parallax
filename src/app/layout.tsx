@@ -35,14 +35,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <span className="material-symbols-outlined text-[#8a8f9e] text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>dataset</span>
                   <span className="text-[15px] font-bold tracking-wide text-[#f0f0f2]">Parallax</span>
                 </div>
-                <span className="text-[13px] text-[#565d70] text-center md:text-left tracking-wide">© 2024 Parallax. Sovereign Institutional Liquidity.</span>
+                <span className="text-[13px] text-[#565d70] text-center md:text-left tracking-wide">© Parallax. Sovereign Institutional Liquidity.</span>
               </div>
               <nav className="flex gap-[32px]">
                 <a href="#" className="text-[13px] font-medium text-[#8a8f9e] hover:text-[#f0f0f2] transition-colors">Terms</a>
                 <a href="#" className="text-[13px] font-medium text-[#8a8f9e] hover:text-[#f0f0f2] transition-colors">Privacy</a>
-                <a href="#" className="text-[13px] font-medium text-[#8a8f9e] hover:text-[#f0f0f2] transition-colors">API Docs</a>
-                <a href="#" className="text-[13px] font-medium text-[#8a8f9e] hover:text-[#f0f0f2] transition-colors">GitHub</a>
-                <a href="#" className="text-[13px] font-medium text-[#8a8f9e] hover:text-[#f0f0f2] transition-colors">Status</a>
+                <a href="https://developers.stellar.org/docs" target="_blank" rel="noopener noreferrer" className="text-[13px] font-medium text-[#8a8f9e] hover:text-[#f0f0f2] transition-colors">API Docs</a>
+                <a href="https://github.com/AyushmanGupta21/Parallax" target="_blank" rel="noopener noreferrer" className="text-[13px] font-medium text-[#8a8f9e] hover:text-[#f0f0f2] transition-colors">GitHub</a>
               </nav>
             </div>
           </footer>
