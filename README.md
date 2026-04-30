@@ -334,7 +334,7 @@ The following flows have been built, integrated, and verified end-to-end on Stel
 
 ## 12. Screenshots
 
-> Add screenshots to the `./public/screenshots/` directory. Two are already included below.
+
 
 ### Landing Page
 ![Landing Page](./public/screenshots/landing.png)
@@ -456,7 +456,7 @@ Responses are tracked in the [Feedback Sheet](https://docs.google.com/spreadshee
 - [ ] 5+ real Testnet user wallet addresses added to Table 1 (Section 14)
 - [ ] Table 2 filled with actual feedback and commit links (Section 14)
 - [ ] Iteration notes filled in Section 15
-- [x] Screenshots added to `./public/screenshots/` directory (Section 12) — 2 of 5 added
+- [x] Screenshots added to `./public/screenshots/` directory (Section 12) — all 5 added
 - [x] GitHub repository is public — [AyushmanGupta21/Parallax](https://github.com/AyushmanGupta21/Parallax)
 
 ---
