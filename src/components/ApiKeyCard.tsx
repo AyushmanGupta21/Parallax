@@ -124,104 +124,86 @@ export function ApiKeyCard({ className }: Props) {
         </div>
         
         <div className="mb-6">
-            <label className="block font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Live Secret Key</label>
-            <div className="flex items-center bg-surface-container-lowest border border-white/10 rounded overflow-hidden group focus-within:border-primary focus-within:shadow-[0_0_8px_rgba(138,235,255,0.2)] transition-all">
-                <input 
-                    className="bg-transparent border-none w-full px-4 py-3 font-body-sm text-body-sm text-on-surface terminal-text focus:ring-0 cursor-text" 
-                    readOnly 
-                    type={isVisible ? "text" : "password"}
-                    value={isAlreadyRegistered && apiKey ? apiKey : "********************************"} 
-                />
+            <label className="block text-[11px] font-bold text-[#565d70] uppercase tracking-[0.08em] mb-2">Live Secret Key</label>
 
-                {/* Show / Hide toggle */}
-                <button
-                    className="p-3 text-on-surface-variant hover:text-white bg-surface-container/50 hover:bg-surface-bright border-l border-white/10 transition-colors"
-                    title={isVisible ? "Hide key" : "Show key"}
-                    onClick={() => setIsVisible((v) => !v)}
-                    disabled={!apiKey}
-                >
-                    <AnimatePresence mode="wait" initial={false}>
-                        {isVisible ? (
-                            <motion.span
-                                key="hide"
-                                initial={{ opacity: 0, scale: 0.7 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.7 }}
-                                transition={{ duration: 0.15 }}
-                            >
-                                <EyeOff size={16} />
-                            </motion.span>
-                        ) : (
-                            <motion.span
-                                key="show"
-                                initial={{ opacity: 0, scale: 0.7 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.7 }}
-                                transition={{ duration: 0.15 }}
-                            >
-                                <Eye size={16} />
-                            </motion.span>
-                        )}
-                    </AnimatePresence>
-                </button>
+            {isAlreadyRegistered && apiKey ? (
+                /* ── Key exists: show input with toggle + copy ── */
+                <div className="flex items-center bg-[#0d0e11] border border-white/10 rounded overflow-hidden focus-within:border-[#00c8d4]/50 focus-within:shadow-[0_0_8px_rgba(0,200,212,0.15)] transition-all">
+                    <input
+                        className="bg-transparent border-none w-full px-4 py-3 text-[13px] text-[#f0f0f2] font-mono focus:ring-0 cursor-text"
+                        readOnly
+                        type={isVisible ? "text" : "password"}
+                        value={apiKey}
+                    />
 
-                {/* Copy button */}
-                <div className="relative">
-                    <button 
-                        className={`p-3 border-l border-white/10 transition-all duration-200 ${
-                            copied
-                                ? "text-[#00c8d4] bg-[#00c8d4]/10"
-                                : "text-on-surface-variant hover:text-white bg-surface-container/50 hover:bg-surface-bright"
-                        }`}
-                        title="Copy to clipboard"
-                        onClick={handleCopy}
-                        disabled={!apiKey}
+                    {/* Show / Hide toggle */}
+                    <button
+                        className="p-3 text-[#565d70] hover:text-white bg-[#121316] hover:bg-[#1a1d24] border-l border-white/10 transition-colors"
+                        title={isVisible ? "Hide key" : "Show key"}
+                        onClick={() => setIsVisible((v) => !v)}
                     >
                         <AnimatePresence mode="wait" initial={false}>
-                            {copied ? (
-                                <motion.span
-                                    key="check"
-                                    initial={{ opacity: 0, scale: 0.5 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.5 }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                                >
-                                    <Check size={16} />
+                            {isVisible ? (
+                                <motion.span key="hide" initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.7 }} transition={{ duration: 0.15 }}>
+                                    <EyeOff size={16} />
                                 </motion.span>
                             ) : (
-                                <motion.span
-                                    key="copy"
-                                    initial={{ opacity: 0, scale: 0.5 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.5 }}
-                                    transition={{ duration: 0.15 }}
-                                >
-                                    <Copy size={16} />
+                                <motion.span key="show" initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.7 }} transition={{ duration: 0.15 }}>
+                                    <Eye size={16} />
                                 </motion.span>
                             )}
                         </AnimatePresence>
                     </button>
 
-                    {/* Floating "Copied!" toast anchored to the button */}
-                    <AnimatePresence>
-                        {copied && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 6, scale: 0.9 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, y: 4, scale: 0.9 }}
-                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                className="absolute bottom-[calc(100%+8px)] right-0 z-50 flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#00c8d4] text-[#0b0c0e] text-[11px] font-bold tracking-wide shadow-[0_0_16px_rgba(0,200,212,0.5)] whitespace-nowrap pointer-events-none"
-                            >
-                                <Check size={11} strokeWidth={3} />
-                                Copied!
-                                {/* Arrow */}
-                                <span className="absolute top-full right-3 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[5px] border-l-transparent border-r-transparent border-t-[#00c8d4]" />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    {/* Copy button */}
+                    <div className="relative">
+                        <button
+                            className={`p-3 border-l border-white/10 transition-all duration-200 ${
+                                copied ? "text-[#00c8d4] bg-[#00c8d4]/10" : "text-[#565d70] hover:text-white bg-[#121316] hover:bg-[#1a1d24]"
+                            }`}
+                            title="Copy to clipboard"
+                            onClick={handleCopy}
+                        >
+                            <AnimatePresence mode="wait" initial={false}>
+                                {copied ? (
+                                    <motion.span key="check" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
+                                        <Check size={16} />
+                                    </motion.span>
+                                ) : (
+                                    <motion.span key="copy" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }} transition={{ duration: 0.15 }}>
+                                        <Copy size={16} />
+                                    </motion.span>
+                                )}
+                            </AnimatePresence>
+                        </button>
+
+                        {/* Floating "Copied!" toast */}
+                        <AnimatePresence>
+                            {copied && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 6, scale: 0.9 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 4, scale: 0.9 }}
+                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                    className="absolute bottom-[calc(100%+8px)] right-0 z-50 flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#00c8d4] text-[#0b0c0e] text-[11px] font-bold tracking-wide shadow-[0_0_16px_rgba(0,200,212,0.5)] whitespace-nowrap pointer-events-none"
+                                >
+                                    <Check size={11} strokeWidth={3} />
+                                    Copied!
+                                    <span className="absolute top-full right-3 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[5px] border-l-transparent border-r-transparent border-t-[#00c8d4]" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </div>
-            </div>
-            <p className="font-body-sm text-body-sm text-on-surface-variant mt-2 text-xs">Keep this key secret. Do not expose it in client-side code.</p>
+            ) : (
+                /* ── No key yet: clean empty state ── */
+                <div className="flex items-center gap-3 px-4 py-3 bg-[#0d0e11] border border-dashed border-white/10 rounded">
+                    <span className="material-symbols-outlined text-[18px] text-[#2e3240] shrink-0">key_off</span>
+                    <span className="text-[13px] text-[#2e3240] font-mono">No key generated yet</span>
+                </div>
+            )}
+
+            <p className="text-[11px] text-[#3a3f50] mt-2">Keep this key secret. Do not expose it in client-side code.</p>
         </div>
 
         {!isAlreadyRegistered && (

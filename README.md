@@ -361,7 +361,7 @@ The following flows have been built, integrated, and verified end-to-end on Stel
 |---|---|
 | **Live Demo URL** | [parallaax.vercel.app](https://parallaax.vercel.app/) |
 | **GitHub Repository** | [AyushmanGupta21/Parallax](https://github.com/AyushmanGupta21/Parallax) |
-| **Demo Video** | TBD |
+| **Demo Video** | [Watch on Google Drive](https://drive.google.com/file/d/1X839v-6wmVG726V90ltkBuCIuLyp3A8B/view?usp=sharing) |
 | **Google Form (User Feedback)** | [Submit Feedback](https://forms.gle/VFmbcgKBwLawk9jSA) |
 | **Feedback Sheet (Excel/CSV)** | [View Responses](https://docs.google.com/spreadsheets/d/1H7KHsjj_p_t2HMDuYbpnyA59RtXjy_dg5OoTbvGAxW0/edit?usp=sharing) |
 | **Contract Explorer** | [CCJ7YK...XUXVE on Testnet](https://stellar.expert/explorer/testnet/contract/CCJ7YKWSXJ35PM7EWVVJRIK66KDYHQ2HILTP364KHEF3XNRK2O7XUXVE) |
@@ -376,7 +376,7 @@ The following flows have been built, integrated, and verified end-to-end on Stel
 | # | User Name | User Email | User Wallet Address | Explorer Link | Status |
 |---|---|---|---|---|---|
 | 1 | Devargho Chakraborty | devarghochakraborty7@gmail.com | `GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7) | ✅ Registered |
-| 2 | TBD | TBD | TBD | TBD | TBD |
+| 2 | Archishman Sarkar | archishmansarkar94@gmail.com | `GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD` | [View on Explorer](https://stellar.expert/explorer/testnet/account/GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD) | ✅ Registered |
 | 3 | TBD | TBD | TBD | TBD | TBD |
 | 4 | TBD | TBD | TBD | TBD | TBD |
 | 5 | TBD | TBD | TBD | TBD | TBD |
@@ -390,7 +390,7 @@ The following flows have been built, integrated, and verified end-to-end on Stel
 | # | User Name | User Email | User Wallet Address | User Feedback | Improvement Made | Commit ID / Commit Link |
 |---|---|---|---|---|---|---|
 | 1 | Devargho Chakraborty | devarghochakraborty7@gmail.com | `GBPYNMCWYBFDEKZGNNFTLTSS5RHG7VHYMXCKASSJSVUCUVS42UM3Y5H7` | Mobile UI and navigation needs improvement — some content on mobile is not properly navigable | Rewrote mobile layout across Transfer, Dashboard and Navbar: fixed Recent Transactions panel height overflow, added scrollable transaction list, fixed Docs nav link, improved mobile drawer UX | [`dff7fa9`](https://github.com/AyushmanGupta21/Parallax/commit/dff7fa9) |
-| 2 | TBD | TBD | TBD | TBD | TBD | TBD |
+| 2 | Archishman Sarkar | archishmansarkar94@gmail.com | `GBB63R6JUV3DR27M635YOK2KASWX3RE6LG42AX7WNKY3NSTORMTO6YJD` | API key placeholder shows password-dots when no key has been generated yet — looks like a key already exists | Replaced misleading password-dots input with a clean dashed empty state ("No key generated yet") when user is not registered; real input with show/hide and copy only appears after key is generated | [`95c80f1`](https://github.com/AyushmanGupta21/Parallax/commit/95c80f1) |
 | 3 | TBD | TBD | TBD | TBD | TBD | TBD |
 | 4 | TBD | TBD | TBD | TBD | TBD | TBD |
 | 5 | TBD | TBD | TBD | TBD | TBD | TBD |
@@ -417,8 +417,9 @@ Responses are tracked in the [Feedback Sheet](https://docs.google.com/spreadshee
 | Iteration | Description | Commit |
 |---|---|---|
 | 1 — Mobile UI & Navigation | **Changes made:** Fixed Recent Transactions panel height overflow on the Transfer page (capped with `max-h` + `overflow-y-auto` scroll); fixed Docs nav link to redirect to Stellar developer docs instead of a 404 page; improved mobile drawer UX; ensured responsive layout integrity across Transfer, Dashboard, and Navbar on all screen sizes. | [`dff7fa9`](https://github.com/AyushmanGupta21/Parallax/commit/dff7fa9) |
+| 2 — API Key Empty State | **Changes made:** Replaced the misleading password-dots input shown before key generation with a clear dashed empty state displaying "No key generated yet". The real input field with show/hide toggle and copy button now only renders once the user has a registered API key, eliminating confusion for first-time users. | [`95c80f1`](https://github.com/AyushmanGupta21/Parallax/commit/95c80f1) |
 
-> Changes are live on [main](https://github.com/AyushmanGupta21/Parallax/commit/dff7fa9).
+> Changes are live on [main](https://github.com/AyushmanGupta21/Parallax).
 
 ---
 
