@@ -38,10 +38,10 @@
 9. [Deployment Notes](#9-deployment-notes)
 10. [CI/CD Pipeline](#10-cicd-pipeline)
 11. [Proof of Functionality](#11-proof-of-functionality)
-12. [Screenshots](#12-screenshots)
-13. [Level 5 User Validation](#13-level-5-user-validation)
-14. [User Tables](#14-user-tables)
-15. [Feedback and Iteration](#15-feedback-and-iteration)
+12. [Screenshots](#12-screenshots) *(5 screenshots included)*
+13. [Level 5 User Validation](#13-level-5-user-validation) *(demo video, feedback form & Excel sheet report)*
+14. [User Tables](#14-user-tables) *(6 registered testnet users)*
+15. [Feedback and Iteration](#15-feedback-and-iteration) *(user feedback & improvement commits)*
 
 ---
 
